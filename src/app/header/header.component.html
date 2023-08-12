@@ -1,0 +1,190 @@
+<!-- <nav>
+    <img src="https://www.w3schools.com/images/lamp.jpg" alt="logo">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">login</a></li>
+      <li><a href="#">User</a></li>
+    </ul>
+</nav>
+<p>egtybhytnhyu</p>
+<form #basicForm="ngForm" (ngSubmit)="getdata(basicForm.value)">
+    <input type="text" ngModel name="user" placeholder="enter your name">
+    <br>
+    <br>
+    <input type="text" ngModel name="email" placeholder="enter your email">
+    <br>
+    <br>
+    <input type="text" ngModel name="password" placeholder="enter your password">
+    <br>
+    <br>
+    <button type="submit">submit</button>
+</form>
+
+<h1>
+    <li>{{userData.user}}</li>
+    <li>{{userData.email}}</li>
+    <li>{{userData.password}}</li>
+</h1>
+
+<button (click)="toggle()">toggle</button>
+
+<h1 *ngIf="display">toggle !!!!!!!!!!!!!</h1>
+
+<p>
+	<ngb-alert [dismissible]="false">
+		<strong>Warning!</strong> Better check yourself, you're not looking too good.
+	</ngb-alert>
+</p> -->
+
+<!-- <div ngbAccordion>
+	<div ngbAccordionItem [collapsed]="false">
+		<h2 ngbAccordionHeader>
+			<button ngbAccordionButton>Simple</button>
+		</h2>
+		<div ngbAccordionCollapse>
+			<div ngbAccordionBody>
+				<ng-template>
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
+					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+					haven't heard of them accusamus labore sustainable VHS.
+				</ng-template>
+			</div>
+		</div>
+	</div>
+	<div ngbAccordionItem>
+		<h2 ngbAccordionHeader>
+			<button ngbAccordionButton>
+				<span>&#9733; <b>Fancy</b> title &#9733;</span>
+			</button>
+		</h2>
+		<div ngbAccordionCollapse>
+			<div ngbAccordionBody>
+				<ng-template>
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
+					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+					haven't heard of them accusamus labore sustainable VHS.
+				</ng-template>
+			</div>
+		</div>
+	</div>
+	<div ngbAccordionItem [disabled]="true">
+		<h2 ngbAccordionHeader>
+			<button ngbAccordionButton>Disabled</button>
+		</h2>
+		<div ngbAccordionCollapse>
+			<div ngbAccordionBody>
+				<ng-template>
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
+					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+					haven't heard of them accusamus labore sustainable VHS.
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+
+<p>Bootstrap split buttons and dropdowns on button groups are supported with the existing dropdown directives.</p>
+
+<div class="btn-group me-3">
+	<button type="button" class="btn btn-outline-success">Plain ol' button</button>
+	<div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+		<button type="button" class="btn btn-outline-primary" ngbDropdownToggle>Drop me</button>
+		<div class="dropdown-menu" ngbDropdownMenu>
+			<button ngbDropdownItem>One</button>
+			<button ngbDropdownItem>Two</button>
+			<button ngbDropdownItem>Four!</button>
+		</div>
+	</div>
+</div>
+
+<div class="btn-group me-3">
+	<button type="button" class="btn btn-primary">Split me</button>
+	<div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+		<button type="button" class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
+		<div class="dropdown-menu" ngbDropdownMenu>
+			<button ngbDropdownItem>One</button>
+			<button ngbDropdownItem>Two</button>
+			<button ngbDropdownItem>Four!</button>
+		</div>
+	</div>
+</div>
+
+<div class="btn-group me-3">
+	<div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+		<button type="button" class="btn btn-outline-danger" ngbDropdownToggle>Select me</button>
+		<div class="dropdown-menu" ngbDropdownMenu>
+			<button ngbDropdownItem>One</button>
+			<button ngbDropdownItem>Two</button>
+			<button ngbDropdownItem>Four!</button>
+		</div>
+	</div>
+	<div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+		<button type="button" class="btn btn-outline-success" ngbDropdownToggle>Or me</button>
+		<div class="dropdown-menu" ngbDropdownMenu>
+			<button ngbDropdownItem>One</button>
+			<button ngbDropdownItem>Two</button>
+			<button ngbDropdownItem>Four!</button>
+		</div>
+	</div>
+</div>
+
+
+<p>Table is just a mapping of objects to table rows with <code>ngFor</code></p> -->
+
+<!-- <table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Country</th>
+			<th scope="col">Area</th>
+			<th scope="col">Population</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let country of countries; index as i">
+			<th scope="row">{{ i + 1 }}</th>
+			<td>
+				<img
+					[src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
+					class="me-2"
+					style="width: 20px"
+				/>
+				{{ country.country }}
+			</td>
+			<td>{{ country.area | number }}</td>
+			<td>{{ country.population | number }}</td>
+		</tr>
+	</tbody>
+</table> -->
+
+<!-- <div>
+	<h6>Body only</h6>
+	<ngb-toast [autohide]="false"> I am a simple static toast. </ngb-toast>
+
+	<h6 class="mt-4">With a text header</h6>
+	<ngb-toast *ngIf="show" header="Hello" [autohide]="false" (hidden)="show=false">
+		I am a simple static toast with a header.
+	</ngb-toast>
+</div> -->
+
+<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+
+<div class="example-label">Raised</div>
+  <div class="example-button-row">
+    <button mat-raised-button>Basic</button>
+    <button mat-raised-button color="primary">Primary</button>
+    <button mat-raised-button color="accent">Accent</button>
+    <button mat-raised-button color="warn">Warn</button>
+    <button mat-raised-button disabled>Disabled</button>
+    <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
+  </div>
