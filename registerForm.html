@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <script>
+            let data = []
+                function createData(form) {
+                    let data1 = {}
+                    data1.firstName = form.value1.value
+                    data1.lastName = form.value2.value
+                    data1.age = form.value3.value
+                    data.push(data1)
+                    console.log(data)
+                }
+
+        </script> -->
+    </head>
+
+    <body>
+        <form action="localhost:3000/add" method="POST" enctype="application/x-www-form-urlencoded">
+            <fieldset>
+            name:<input type="text" name="value1">
+            <br />
+            <br />
+            age:<input type="text" name="value2">
+            <br />
+            <br />
+            gender:<input type="text" name="value2">
+            <br />
+            <br />
+            <button type="button" value="submit"> submit</button> 
+        </fieldset>  
+        </form>
+    </body>
+</html>
