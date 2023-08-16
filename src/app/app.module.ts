@@ -11,6 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
+import { GetComponent } from './get/get.component';
+import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { UsdInrPipe } from './pipe/usd-inr.pipe';
+
 
 
 
@@ -18,7 +24,12 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     ChildComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    GetComponent,
+    HomeComponent,
+    UserComponent,
+    UsdInrPipe
   ],
   imports: [
     BrowserModule,

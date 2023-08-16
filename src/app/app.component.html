@@ -1,3 +1,4 @@
+<router-outlet></router-outlet>
 <!-- 
 <br>
 <br>
@@ -50,28 +51,35 @@
 <br>
 <button (click)="createData(task.value)">submit</button> -->
 
-<form #basicForm="ngForm" (ngSubmit)="createData(basicForm.value)">
-  <input type="text" ngModel name="user" placeholder="enter your name">
-  <br>
-  <br>
-  <input type="text" ngModel name="email" placeholder="enter age">
-  <br>
-  <br>
-  <input type="text" ngModel name="password" placeholder="enter your gender">
-  <br>
-  <br>
-  <button type="submit">submit</button>
-</form>
+<!-- <form #basicForm="ngForm" (ngSubmit)="createData(basicForm.value)">
+	<br>
+	<br>
+	<input type="text" ngModel name="name" placeholder="enter your name">
+	<br>
+	<br>
+	<input type="text" ngModel name="age" placeholder="enter age">
+	<br>
+	<br>
+	<p>Please select your gender:</p>
+	  <input type="radio" ngModel name="gender" value="male">
+	  <label for="male">MALE</label><br>
+	  <input type="radio" ngModel name="gender" value="female">
+	  <label for="female">FEMALE</label>
+	<br>
+	<br>
+	<button type="submit">submit</button>
+</form> -->
 
-<h1>All Data</h1>
+<!-- <h1>All Data</h1>
 <button (click)="getData()">get data</button>
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th scope="col">id</th>
 			<th scope="col">name</th>
-      <th scope="col">age</th>
-      <th scope="col">gender</th>
+			<th scope="col">age</th>
+			<th scope="col">gender</th>
+			<th scope="col">remove</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -80,12 +88,27 @@
 			<td>
 				{{data.name}}
 			</td>
-      <td>
+			<td>
 				{{data.age}}
 			</td>
-      <td>
+			<td>
 				{{data.gender}}
 			</td>
-    </tr>
+			<td>
+				<button (click)="deleteData(data.id)" (click)="getData()">remove</button>
+			</td>
+		</tr>
 	</tbody>
-</table>
+</table> -->
+
+
+<!-- <nav>
+	<button routerLink="/register">register</button>
+</nav> -->
+<br>
+<br>
+<!-- <nav>
+	<button routerLink="/login">login</button>
+</nav> -->
+
+<!-- <button (click)='http://localhost:4200/register'>register</button> -->

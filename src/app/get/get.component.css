@@ -3,12 +3,12 @@ nav img{
 }
 
 nav {
-    background-color: rgb(173, 235, 135);
+    background-color: skyblue;
     padding: 50px;
 }
 
 ul{
-    float:left;
+    float:right;
     list-style-type:none;
 }
 

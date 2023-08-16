@@ -1,0 +1,38 @@
+<h1>All Data</h1>
+<nav>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/login">login</a></li>
+      <button (click)="getData()">get data</button>
+    </ul>
+</nav>
+<br>
+<br>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">id</th>
+			<th scope="col">name</th>
+			<th scope="col">age</th>
+			<th scope="col">gender</th>
+			<th scope="col">remove</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let data of userData">
+			<th scope="row">{{data.id}}</th>
+			<td>
+				{{data.name}}
+			</td>
+			<td>
+				{{data.age}}
+			</td>
+			<td>
+				{{data.gender}}
+			</td>
+			<td>
+				<button (click)="deleteData(data.id)" (click)="getData()">remove</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

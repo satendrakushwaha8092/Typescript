@@ -1,14 +1,11 @@
-nav img{
-    width:70px
-}
 
 nav {
-    background-color: rgb(173, 235, 135);
-    padding: 50px;
+    background-color: skyblue;
+    padding: 40px;
 }
 
 ul{
-    float:left;
+    float:right;
     list-style-type:none;
 }
 

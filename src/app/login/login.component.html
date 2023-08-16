@@ -1,6 +1,14 @@
-<!-- <p>login works!</p>
+<p>login works!</p>
 
 <h1>{{title}}</h1>
+
+<nav>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/register">Register</a></li>
+    </ul>
+</nav>
+
 
 <html lang="en">
 <head>
@@ -30,13 +38,19 @@
     <title>Centered Form</title>
 </head>
 <body>
-    <form>
+    <form #basicForm="ngForm" (ngSubmit)="login(basicForm.value)">
         <input type="text" ngModel name="email" placeholder="enter your email">
         <br><br>
         <input type="text" ngModel name="password" placeholder="enter your password">
         <br><br>
-        <button type="submit">submit</button>
+        <button type="submit" >submit</button>
     </form>
 </body>
+
 </html>
- -->
+
+<ng-template [ngIf]="check==true">
+        <meta http-equiv="refresh" content="7; url='http://localhost:4200/user'" />    
+  </ng-template>
+
+

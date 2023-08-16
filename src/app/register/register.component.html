@@ -1,0 +1,27 @@
+<nav>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/login">Login</a></li>
+    </ul>
+</nav>
+
+<form #basicForm="ngForm" (ngSubmit)="createData(basicForm.value)">
+	<br>
+	<br>
+	<input type="text" ngModel name="name" placeholder="enter your name">
+	<br>
+	<br>
+	<input type="text" ngModel name="age" placeholder="enter age">
+	<br>
+	<br>
+	<p>Please select your gender:</p>
+	  <input type="radio" ngModel name="gender" value="male">
+	  <label for="male">MALE</label><br>
+	  <input type="radio" ngModel name="gender" value="female">
+	  <label for="female">FEMALE</label>
+	<br>
+	<br>
+	<button type="submit">submit</button>
+</form>
+<br>
+<br>
