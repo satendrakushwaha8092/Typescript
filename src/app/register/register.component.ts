@@ -16,7 +16,6 @@ export class RegisterComponent {
   userData:any;
 
   createData(data:any): void {
-    const headers = { 'content-type': 'application/json'}  
     this.http.post("http://localhost:3000/add",data).subscribe(
       (userData: any) => {
           // Handle the retrieved user data here

@@ -11,6 +11,12 @@ import { GetComponent } from './get/get.component';
 
 import { UserComponent } from './user/user.component';
 
+import { SweetalertComponent } from './sweetalert/sweetalert.component';
+
+import { UpdateComponent } from './update/update.component';
+
+import { NoPageComponent } from './no-page/no-page.component';
+
 const routes: Routes = [
   {
     path: 'login',
@@ -31,6 +37,18 @@ const routes: Routes = [
   {
     path: 'user',
     component:UserComponent,
+  },
+  {
+    path: 'alert',
+    component:SweetalertComponent,
+  },
+  {
+    path: 'update/:id',
+    component:UpdateComponent,
+  },
+  {
+    path: '**',
+    component:NoPageComponent,
   },
    { path: '',   redirectTo: '/home', pathMatch: 'full' }
 ];

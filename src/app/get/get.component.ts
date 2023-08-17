@@ -14,11 +14,13 @@ import { HttpClient } from '@angular/common/http';
 export class GetComponent {
   constructor(private http: HttpClient) {}
   userData:any;
-    getData(): void {
-    this.http.get("http://localhost:3000/user").subscribe(
+  name:any
+    getData(search:any): void {
+    this.http.get("http://localhost:3000/user"+'?search='+search).subscribe(
         (userData: any) => {
             // Handle the retrieved user data here
             this.userData=userData;
+            console.log(this.userData)
         },
         (error: any) => {
             console.error('Error fetching user data:', error);

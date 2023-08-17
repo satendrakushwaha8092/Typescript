@@ -16,7 +16,11 @@ import { GetComponent } from './get/get.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { UsdInrPipe } from './pipe/usd-inr.pipe';
+import { SweetalertComponent } from './sweetalert/sweetalert.component';
+import { UpdateComponent } from './update/update.component';
+import { NoPageComponent } from './no-page/no-page.component';
 
+import { UserdataService } from './services/userdata.service';
 
 
 
@@ -29,7 +33,10 @@ import { UsdInrPipe } from './pipe/usd-inr.pipe';
     GetComponent,
     HomeComponent,
     UserComponent,
-    UsdInrPipe
+    UsdInrPipe,
+    SweetalertComponent,
+    UpdateComponent,
+    NoPageComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,7 @@ import { UsdInrPipe } from './pipe/usd-inr.pipe';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UserdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

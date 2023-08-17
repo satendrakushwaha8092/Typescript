@@ -1,9 +1,9 @@
-<h1>All Data</h1>
+
 <nav>
     <ul>
       <li><a href="/home">Home</a></li>
       <li><a href="/login">login</a></li>
-      <button (click)="getData()">get data</button>
+	  <input type="text"  #search (keyup)="getData(search.value)" placeholder="Search..">
     </ul>
 </nav>
 <br>
@@ -16,6 +16,7 @@
 			<th scope="col">age</th>
 			<th scope="col">gender</th>
 			<th scope="col">remove</th>
+			<th scope="col">update</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -31,7 +32,10 @@
 				{{data.gender}}
 			</td>
 			<td>
-				<button (click)="deleteData(data.id)" (click)="getData()">remove</button>
+				<button (click)="deleteData(data.id)" (click)="getData('')">remove</button>
+			</td>
+			<td>
+				<button (click)="getData(data.id)"><a href="/update/{{data.id}}">update</a></button>
 			</td>
 		</tr>
 	</tbody>

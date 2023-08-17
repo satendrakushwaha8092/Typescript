@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +13,12 @@ import { HttpClient } from '@angular/common/http';
 @ Injectable({providedIn:"root"})
 
 export class LoginComponent {
+
+  // loginForm = new FormGroup({
+  //   email:new FormControl('',[Validators.required, Validators.email]),
+  //   password:new FormControl('',[Validators.required])
+  // })
+  
 
   check=false
 
@@ -35,6 +42,7 @@ export class LoginComponent {
   login(data:any): void { 
     this.http.post("http://localhost:3000/login",data).subscribe(
       (userData: any) => {
+        console.log(userData.response)
           // Handle the retrieved user data here
                       if(userData.response=="success"){
                         this.check=true

@@ -11,48 +11,6 @@ import { HttpClient } from '@angular/common/http';
 
 @ Injectable({providedIn:"root"})
 export class AppComponent {
-
-  constructor(private http: HttpClient) {}
-  userData:any;
-
-//   createData(data:any): void {
-//     const headers = { 'content-type': 'application/json'}  
-//     this.http.post("http://localhost:3000/add",data).subscribe(
-//       (userData: any) => {
-//           // Handle the retrieved user data here
-//           console.log(userData)
-//       },
-//       (error: any) => {
-//           console.error('Error fetching user data:', error);
-//       }
-//   );
-//   this.getData()
-// }
-
-//   getData(): void {
-//     this.http.get("http://localhost:3000/user").subscribe(
-//         (userData: any) => {
-//             // Handle the retrieved user data here
-//             this.userData=userData;
-//         },
-//         (error: any) => {
-//             console.error('Error fetching user data:', error);
-//         }
-//     );
-// }
-
-// deleteData(id:any): void {
-//   this.http.delete("http://localhost:3000/user/"+id).subscribe(
-//       (userData: any) => {
-//           // Handle the retrieved user data here
-//           console.log(userData);
-//       },
-//       (error: any) => {
-//           console.error('Error fetching user data:', error);
-//       }
-//   );
-// }
-
   name:any
   data=0
   updateChild(){
