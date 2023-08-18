@@ -16,6 +16,8 @@ export class AppComponent {
   updateChild(){
     this.data=Math.random()*1000
   }
+
+  testData = [1, 23]
   title = 'my-app';
   lists:any[] =[]
   c=0

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +12,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @ Injectable({providedIn:"root"})
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
+  @Input() data:any;
+  
+
 
   // loginForm = new FormGroup({
   //   email:new FormControl('',[Validators.required, Validators.email]),
@@ -22,7 +26,13 @@ export class LoginComponent {
 
   check=false
 
+
+
   constructor(private http: HttpClient) {}
+  
+  ngOnInit(): void {
+    console.log(this.data)
+  }
   userData:any;
 
   loginUserData(): void { 

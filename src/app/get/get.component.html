@@ -3,7 +3,7 @@
     <ul>
       <li><a href="/home">Home</a></li>
       <li><a href="/login">login</a></li>
-	  <input type="text"  #search (keyup)="getData(search.value)" placeholder="Search..">
+	  <input type="text"  #search (keyup)="getData(search.value,'','')" placeholder="Search..">
     </ul>
 </nav>
 <br>
@@ -32,11 +32,46 @@
 				{{data.gender}}
 			</td>
 			<td>
-				<button (click)="deleteData(data.id)" (click)="getData('')">remove</button>
+				<button (click)="deleteData(data.id)">remove</button>
 			</td>
 			<td>
-				<button (click)="getData(data.id)"><a href="/update/{{data.id}}">update</a></button>
+				<button (click)="getDataById(data.id)"><a href="/update/{{data.id}}">update</a></button>
 			</td>
 		</tr>
 	</tbody>
 </table>
+
+<!-- <button (click)="getData('',1)">1</button>
+<button (click)="getData('',2)">2</button>
+<button (click)="getData('',3)">3</button> -->
+
+<mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[1, 2, 3, 4]"
+              aria-label="Select page"
+			  (page)="onPageChange($event)">
+</mat-paginator>
+
+<mat-card>
+	<mat-card-header>
+	  <mat-card-title>Actions Buttons</mat-card-title>
+	  <mat-card-subtitle>Start</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-actions align="start">
+	  <button mat-button>LIKE</button>
+	  <button mat-button>SHARE</button>
+	</mat-card-actions>
+  </mat-card>
+  <br>
+  <mat-card>
+	<mat-card-header>
+	  <mat-card-title>Actions Buttons</mat-card-title>
+	  <mat-card-subtitle>End</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-actions align="end">
+	  <button mat-button>LIKE</button>
+	  <button mat-button>SHARE</button>
+	</mat-card-actions>
+  </mat-card>
+  
+

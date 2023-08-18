@@ -46,11 +46,11 @@ const routes: Routes = [
     path: 'update/:id',
     component:UpdateComponent,
   },
-  {
-    path: '**',
-    component:NoPageComponent,
-  },
-   { path: '',   redirectTo: '/home', pathMatch: 'full' }
+  // {
+  //   path: '**',
+  //   component:NoPageComponent,
+  // },
+  //  { path: '',   redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({

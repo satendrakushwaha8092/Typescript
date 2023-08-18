@@ -12,5 +12,10 @@ export class UserdataService {
   getData(search:any){
    return this.http.get("http://localhost:3000/user"+'?search='+search)
 }
+getDataById(search:any){
+  //  return this.http.get("http://localhost:3000/user"+'?search='+search)
+  return this.http.get("http://localhost:3000/user/"+search)
+
+}
 }
 
