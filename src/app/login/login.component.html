@@ -1,0 +1,57 @@
+<p>login works!</p>
+
+<!-- <h1>{{title}}</h1> -->
+
+<nav>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/register">Register</a></li>
+    </ul>
+</nav>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        form {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        input, button {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
+    <title>Centered Form</title>
+</head>
+<body>
+    <form #basicForm="ngForm" (ngSubmit)="login(basicForm.value)">
+        <input type="text" ngModel name="email" placeholder="enter your email">
+        <br><br>
+        <input type="text" ngModel name="password" placeholder="enter your password">
+        <br><br>
+        <button type="submit" >submit</button>
+    </form>
+    
+</body>
+
+</html>
+
+
+<!-- <ng-template [ngIf]="check==true">
+        <meta http-equiv="refresh" content="7; url='http://localhost:4200/user'" />    
+  </ng-template> -->
+

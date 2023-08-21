@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+  usertoken = '';
+  arr:any[]=[]
+  updateData(item: any) {
+    this.arr.push(item);
+    console.log(this.arr)
+  }
 }
