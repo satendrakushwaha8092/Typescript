@@ -1,1 +1,17 @@
 <p>view-user works!</p>
+
+<!-- <h1>{{employeeDetail | json}}</h1> -->
+
+<div>
+	<h6>Body only</h6>
+	<ngb-toast [autohide]="false"> I am a simple static toast. </ngb-toast>
+
+	<h6 class="mt-4">With a text header</h6>
+	<ngb-toast *ngIf="show" header="user detail" [autohide]="false" (hidden)="show=false">
+		{{employeeDetail | json}}
+        <li>{{employeeDetail.name}}</li>
+        <li>{{employeeDetail.age}}</li>
+        <li>{{employeeDetail.gender}}</li>
+        <li><button>update</button></li>
+	</ngb-toast>
+</div>

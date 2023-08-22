@@ -9,18 +9,36 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { FormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import {ToastrModule} from 'ngx-toastr'
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+//import { NgbdToastGlobal } from './toast-global/toast-global.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AddUserComponent,
     EditUserComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
