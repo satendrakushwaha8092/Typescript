@@ -5,6 +5,11 @@ exports.create= (req, res) => {
 }
 
 exports.getUserData= async (req, res) => {
-    const result = await userModel.find({$and:[{otp:{$gt:1}},{otp:{$lt:2000}}]})
+    const result = await userModel.find()
+    res.send(result)
+}
+
+exports.createUserData= async (req, res) => {
+    const result = await userModel.create(req.body)
     res.send(result)
 }

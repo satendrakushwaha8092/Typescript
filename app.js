@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect("mongodb+srv://Vikas8692:1234@cluster0.ixgyyhk.mongodb.net/mahaBuzz?retryWrites=true&w=majority", {    
+mongoose.connect("mongodb+srv://Vikas8692:1234@cluster0.ixgyyhk.mongodb.net/satendra?retryWrites=true&w=majority", {    
 
     useNewUrlParser: true
 })
