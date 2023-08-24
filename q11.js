@@ -11,4 +11,4 @@ function primeNumbers(n){
     }
 }
 
-primeNumbers(50)
+primeNumbers(100)
