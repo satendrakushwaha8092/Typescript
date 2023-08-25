@@ -17,9 +17,18 @@ import {ToastrModule} from 'ngx-toastr'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 //import { NgbdToastGlobal } from './toast-global/toast-global.component';
 
+import {MatInputModule} from '@angular/material/input';
 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import {MatTreeModule} from '@angular/material/tree';
+
+import { MatIconModule } from '@angular/material/icon';
+import { TreeComponent } from './tree/tree.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +38,9 @@ import { LoginComponent } from './login/login.component';
     EditUserComponent,
     ViewUserComponent,
     LoginComponent,
+    ResetPasswordComponent,
+    DatePickerComponent,
+    TreeComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +50,10 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-
+    MatInputModule,
+    MatDatepickerModule,
+    MatTreeModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

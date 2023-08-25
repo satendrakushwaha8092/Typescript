@@ -8,27 +8,37 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class AppComponent {
-  title = 'my-app';
-  constructor(public toastr: ToastrService){}
 
-  showSuccess(){
-   this.toastr.success('everything is broken', 'Major Error', {
-  timeOut: 3000,
-});
+  constructor() {}
+  treeControl=true
+  picker=true
+  selectedDate: Date | null = null; // Property to store the selected date
+  textInputValue: string = '';      // Property to store the text input value
+
+  formatSelectedDate(): string {
+    return this.selectedDate ? this.selectedDate.toLocaleDateString() : '';
   }
-  showError(){
-   this.toastr.error('everything is broken', 'Major Error', {
-  timeOut: 3000,
-});
-  }
-   showInfo(){
-   this.toastr.info('everything is broken', 'Major Error', {
-  timeOut: 3000,
-});
-  }
-   showWarning(){
-   this.toastr.warning('everything is broken', 'Major Error', {
-  timeOut: 3000,
-});
-  }
+//   title = 'my-app';
+//   constructor(public toastr: ToastrService){}
+
+//   showSuccess(){
+//    this.toastr.success('everything is broken', 'Major Error', {
+//   timeOut: 3000,
+// });
+//   }
+//   showError(){
+//    this.toastr.error('everything is broken', 'Major Error', {
+//   timeOut: 3000,
+// });
+//   }
+//    showInfo(){
+//    this.toastr.info('everything is broken', 'Major Error', {
+//   timeOut: 3000,
+// });
+//   }
+//    showWarning(){
+//    this.toastr.warning('everything is broken', 'Major Error', {
+//   timeOut: 3000,
+// });
+//   }
 }
