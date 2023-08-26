@@ -12,7 +12,7 @@ import { TreeComponent } from './tree/tree.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'Home', pathMatch: 'full'},
+   { path: '', redirectTo: 'Home', pathMatch: 'full'},
   { path: 'Home', component: HomeComponent },
   { path: 'ViewUser/:Id', component: ViewUserComponent },
   { path: 'AddUser', component: AddUserComponent },
@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'resetpassword', component: ResetPasswordComponent } ,
   { path: 'tree', component: TreeComponent },
   { path: 'date-picker', component: DatePickerComponent },
-
 
 ];
 

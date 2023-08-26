@@ -8,6 +8,9 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class WebApiService {
+  put(updateUser: string, model: any): Observable<any> {
+    throw new Error('Method not implemented.');
+  }
   constructor(private httpClient: HttpClient) { }
 
   // Get call method

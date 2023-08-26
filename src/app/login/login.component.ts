@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpProviderService } from '../Service/http-provider.service';
@@ -20,33 +20,23 @@ export class LoginComponent implements OnInit {
 
   userData: any;
 
-  // loginUserData(): void {
-  //   this.http.get('http://localhost:3000/login').subscribe(
-  //     (userData: any) => {
-  //       // Handle the retrieved user data here
-  //       if (userData.response == 'success') {
-  //       }
-  //       this.router.navigate(['/Home']);
-  //     },
-  //     (error: any) => {
-  //       console.error('Error fetching user data:', error);
-  //     }
-  //   );
-  // }
+  token: any;
 
   login(data: any) {
+
+    let header=new HttpHeaders().set("Authorization", "Bearer " + "qqqqqqqqqqqqqqqqqqq");         
+
     this.httpProvider.loginUser(data).subscribe(
       (userData: any) => {
-        console.log(userData.response);
+        this.token=userData.token;
+        localStorage.setItem('token',this.token)
+        console.log(userData.token);
         // Handle the retrieved user data here
         if (userData.response == 'success') {
-          this.check = true;
-          this.userData = userData;
+           setTimeout(() => {
+            this.router.navigate(['/ViewUser/'+userData.userId]);
+          }, 500);
         }
-
-        setTimeout(() => {
-          this.router.navigate(['/ViewUser/30']);
-        }, 500);
       },
       (error: any) => {
         console.error('Error fetching user data:', error);

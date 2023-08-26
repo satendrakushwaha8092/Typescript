@@ -13,9 +13,9 @@ export class ViewUserComponent implements OnInit {
   show=true
 
   employeeId: any;
-  employeeDetail : any= [];
+  userDetail : any= [];
 
-  constructor( private route: ActivatedRoute, private httpProvider : HttpProviderService) { }
+  constructor( private rout: Router, private route: ActivatedRoute, private httpProvider : HttpProviderService) { }
 
   ngOnInit(): void {
     //this.employeeId=5
@@ -26,14 +26,18 @@ export class ViewUserComponent implements OnInit {
 
   getUserDetailById() {       
     this.httpProvider.getUserDetailById(this.employeeId).subscribe((data : any) => {      
-      if (data != null && data.body != null) {
-        var resultData = data.body;
-        if (resultData) {
-          this.employeeDetail = resultData;
-        }
-      }
-    },
+      // if (data != null && data.body != null) {
+      //   var resultData = data.body;
+      //   if (resultData) {
+          this.userDetail = data;
+    //     }
+    //   }
+     },
     (error :any)=> { }); 
+  }
+
+  updateUser() {
+    this.rout.navigate(['EditUser/'+this.userDetail.id]);
   }
 
 

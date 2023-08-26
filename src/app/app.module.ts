@@ -29,6 +29,7 @@ import {MatTreeModule} from '@angular/material/tree';
 
 import { MatIconModule } from '@angular/material/icon';
 import { TreeComponent } from './tree/tree.component';
+import { HttpProviderService } from './Service/http-provider.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { TreeComponent } from './tree/tree.component';
     MatTreeModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [HttpProviderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
