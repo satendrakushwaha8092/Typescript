@@ -30,6 +30,20 @@ import {MatTreeModule} from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { TreeComponent } from './tree/tree.component';
 import { HttpProviderService } from './Service/http-provider.service';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { TabComponent } from './tab/tab.component';
+
+import {MatTabsModule} from '@angular/material/tabs';
+
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
+import {MatDialogModule} from '@angular/material/dialog';
+import { NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DialogComponent } from './dialog/dialog.component';
+import { PracticeComponent } from './practice/practice.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +56,10 @@ import { HttpProviderService } from './Service/http-provider.service';
     ResetPasswordComponent,
     DatePickerComponent,
     TreeComponent,
+    FileUploadComponent,
+    TabComponent,
+    DialogComponent,
+    PracticeComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +72,16 @@ import { HttpProviderService } from './Service/http-provider.service';
     MatInputModule,
     MatDatepickerModule,
     MatTreeModule,
-    MatIconModule
+    MatIconModule,
+    MatTabsModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    NgIf,
+    MatDialogModule,
   ],
   providers: [HttpProviderService],
   bootstrap: [AppComponent]

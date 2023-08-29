@@ -10,6 +10,10 @@ import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TreeComponent } from './tree/tree.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { TabComponent } from './tab/tab.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { PracticeComponent } from './practice/practice.component';
 
 const routes: Routes = [
    { path: '', redirectTo: 'Home', pathMatch: 'full'},
@@ -22,7 +26,10 @@ const routes: Routes = [
   { path: 'resetpassword', component: ResetPasswordComponent } ,
   { path: 'tree', component: TreeComponent },
   { path: 'date-picker', component: DatePickerComponent },
-
+  { path: 'file-upload', component: FileUploadComponent },
+  { path: 'tab', component: TabComponent },
+  { path: 'dialog', component: DialogComponent },
+  { path: 'practice', component: PracticeComponent },
 ];
 
 @NgModule({

@@ -5,6 +5,43 @@
     </ul>
 </nav>
 
+<ol>
+	<li>
+	  <mat-form-field>
+		<mat-label>What's your name?</mat-label>
+		<input matInput [(ngModel)]="name">
+	  </mat-form-field>
+	</li>
+	<br>
+	<br>
+	<li>
+	  <button mat-raised-button (click)="openDialog()">Update name</button>
+	</li>
+	<br>
+	<br>
+	<li *ngIf="animal">
+	  You chose: <em>{{animal}}</em>
+	</li>
+	<li>
+		<button mat-raised-button (click)="openDialog()">Update name</button>
+	  </li>
+	  <br>
+	<br>
+	  <li *ngIf="animal">
+		You chose: <em>{{animal}}</em>
+	  </li>
+	  <br>
+	<br>
+	  <li>
+		<button mat-raised-button (click)="openDialog()">Update name</button>
+	  </li>
+	  <li *ngIf="animal">
+		You chose: <em>{{animal}}</em>
+	  </li>
+	  
+  </ol>
+  
+
 <form #basicForm="ngForm" (ngSubmit)="updateUser(basicForm.value)">
 	<br>
 	<br>

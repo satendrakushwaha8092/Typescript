@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserComponent } from './add-user.component';
+import { TabComponent } from './tab.component';
 
-describe('AddUserComponent', () => {
-  let component: AddUserComponent;
-  let fixture: ComponentFixture<AddUserComponent>;
+describe('TabComponent', () => {
+  let component: TabComponent;
+  let fixture: ComponentFixture<TabComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddUserComponent]
+      declarations: [TabComponent]
     });
-    fixture = TestBed.createComponent(AddUserComponent);
+    fixture = TestBed.createComponent(TabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
