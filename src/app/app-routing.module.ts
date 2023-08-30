@@ -14,9 +14,10 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TabComponent } from './tab/tab.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { PracticeComponent } from './practice/practice.component';
+import { RemoveUserComponent } from './remove-user/remove-user.component';
 
 const routes: Routes = [
-   { path: '', redirectTo: 'Home', pathMatch: 'full'},
+  //  { path: '', redirectTo: 'Home', pathMatch: 'full'},
   { path: 'Home', component: HomeComponent },
   { path: 'ViewUser/:Id', component: ViewUserComponent },
   { path: 'AddUser', component: AddUserComponent },
@@ -30,6 +31,8 @@ const routes: Routes = [
   { path: 'tab', component: TabComponent },
   { path: 'dialog', component: DialogComponent },
   { path: 'practice', component: PracticeComponent },
+  { path: 'remove-user', component: RemoveUserComponent },
+
 ];
 
 @NgModule({

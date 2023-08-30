@@ -3,8 +3,8 @@
 <!-- <h1>{{userDetail | json}}</h1> -->
 
 <div>
-	<h6>Body only</h6>
-	<ngb-toast [autohide]="false"> I am a simple static toast. </ngb-toast>
+	<h6>Hiii___</h6>
+	<ngb-toast [autohide]="false"> {{userDetail.name}}</ngb-toast>
 
 	<h6 class="mt-4">With a text header</h6>
 	<ngb-toast *ngIf="show" header="user detail" [autohide]="false" (hidden)="show=false">
@@ -13,5 +13,7 @@
         <li>{{userDetail.age}}</li>
         <li>{{userDetail.gender}}</li>
         <li><button (click)="updateUser()">update</button></li>
+		<br>
+		<li><button mat-raised-button (click)="openDialog('0ms', '0ms')">delete</button></li>
 	</ngb-toast>
 </div>

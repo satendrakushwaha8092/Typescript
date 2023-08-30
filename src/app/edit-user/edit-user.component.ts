@@ -10,7 +10,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 export interface DialogData {
-  animal: string;
   name: string;
 }
 
@@ -22,7 +21,6 @@ export interface DialogData {
 export class EditUserComponent implements OnInit{
   userId:any
   userDetail: any;
-  animal: any;
   name: any;
   constructor( private route: ActivatedRoute, private httpProvider : HttpProviderService, public dialog: MatDialog) { }
 
@@ -47,12 +45,11 @@ export class EditUserComponent implements OnInit{
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: {name: this.name, animal: this.animal},
+      data: {name: this.name},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log( result);
-      this.animal = result;
       this.httpProvider.updateUser(this.userId,{name:result}).subscribe((data : any) => {      
         if (data != null && data.body != null) {
           var resultData = data.body;

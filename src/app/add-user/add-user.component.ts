@@ -11,27 +11,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
+  uploadedImage:any;
+  path:any
   constructor(
     private router: Router,
     private httpProvider: HttpProviderService,
-    private toastr: ToastService
+    public toastService: ToastService
   ) {}
 
   ngOnInit(): void {}
 
-  createData(data: any) {
-    this.httpProvider.saveUser(data).subscribe(
+  imageUploadAction() {
+    const imageFormData = new FormData();
+    imageFormData.append('image', this.uploadedImage, this.uploadedImage.name);
+    console.log( this.uploadedImage, this.uploadedImage.name)
+
+
+    this.httpProvider.uploadFile(imageFormData).subscribe(
       (data: any) => {
-        if (data != null && data.body != null) {
-          //if (resultData != null && resultData.isSuccess) {
-          this.toastr.show('I am a standard toast', {
-            timeOut: 3000,
-          });
-          setTimeout(() => {
-            this.router.navigate(['/Home']);
-          }, 1000);
-          //}
-        }
+        this.path=data
       },
       async (error) => {
         //this.toastr.error(error.message);
@@ -41,4 +39,30 @@ export class AddUserComponent implements OnInit {
       }
     );
   }
+
+  createData(data: any) {
+    data.path=this.path.path
+    this.httpProvider.saveUser(data).subscribe(
+      (data: any) => {
+          //if (resultData != null && resultData.isSuccess) {
+            this.toastService.show('user added successfully', { classname: 'bg-success text-light', delay: 2000 });
+
+          setTimeout(() => {
+            this.router.navigate(['/Home']);
+          }, 3000);
+          //}
+      },
+      async (error) => {
+        //this.toastr.error(error.message);
+        setTimeout(() => {
+          this.router.navigate(['/Home']);
+        }, 1000);
+      }
+    );
+  }
+
+  public onImageUpload(event:any) {
+    this.uploadedImage = event.target.files[0];
+  } 
+
 }

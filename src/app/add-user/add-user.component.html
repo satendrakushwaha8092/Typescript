@@ -17,6 +17,12 @@
 	<input type="date" ngModel name="dob" placeholder="dob" placeholder="enter dob">
 	<br>
 	<br>
+	<input type="email" ngModel name="email" placeholder="email" placeholder="enter email">
+	<br>
+	<br>
+	<input type="password" ngModel name="password" placeholder="password" placeholder="enter password">
+	<br>
+	<br>
 	<p>Please select your gender:</p>
 	  <input type="radio" ngModel name="gender" value="male">
 	  <label for="male">MALE</label><br>
@@ -24,10 +30,10 @@
 	  <label for="female">FEMALE</label>
 	<br>
 	<br>
-	<input type="file" ngModel name="fileupload">
-	<button type="submit">submit</button>
+	<input type="file" (change)="onImageUpload($event)">
+	<!-- <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">	 -->
+	<button type="submit" (click)="imageUploadAction()">submit</button>
     
 </form>
 <br>
 <br>
-

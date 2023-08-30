@@ -1,69 +1,68 @@
 <nav>
-    <ul>
-      <li><a href="/home">Home</a></li>
-      <li><a href="/login">Login</a></li>
-    </ul>
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/login">Login</a></li>
+  </ul>
 </nav>
 
 <ol>
-	<li>
-	  <mat-form-field>
-		<mat-label>What's your name?</mat-label>
-		<input matInput [(ngModel)]="name">
-	  </mat-form-field>
-	</li>
-	<br>
-	<br>
-	<li>
-	  <button mat-raised-button (click)="openDialog()">Update name</button>
-	</li>
-	<br>
-	<br>
-	<li *ngIf="animal">
-	  You chose: <em>{{animal}}</em>
-	</li>
-	<li>
-		<button mat-raised-button (click)="openDialog()">Update name</button>
-	  </li>
-	  <br>
-	<br>
-	  <li *ngIf="animal">
-		You chose: <em>{{animal}}</em>
-	  </li>
-	  <br>
-	<br>
-	  <li>
-		<button mat-raised-button (click)="openDialog()">Update name</button>
-	  </li>
-	  <li *ngIf="animal">
-		You chose: <em>{{animal}}</em>
-	  </li>
-	  
-  </ol>
-  
+  <li>
+    <mat-form-field>
+      <mat-label>What's your name?</mat-label>
+      <input matInput [(ngModel)]="name" />
+    </mat-form-field>
+  </li>
+  <br />
+  <br />
+  <li>
+    <button mat-raised-button (click)="openDialog()">Update name</button>
+  </li>
+  <br />
+  <li *ngIf="name">
+    You chose: <em>{{ name }}</em>
+  </li>
+  <li>
+    <button mat-raised-button (click)="openDialog()">Update name</button>
+  </li>
+  <br />
+  <li *ngIf="name">
+    You chose: <em>{{ name }}</em>
+  </li>
+  <br />
+  <li>
+    <button mat-raised-button (click)="openDialog()">Update name</button>
+  </li>
+  <li *ngIf="name">
+    You chose: <em>{{ name }}</em>
+  </li>
+</ol>
 
 <form #basicForm="ngForm" (ngSubmit)="updateUser(basicForm.value)">
-	<br>
-	<br>
-	<input type="text" ngModel name="name" placeholder="enter your name">
-	<br>
-	<br>
-	<input type="text" ngModel name="age" placeholder="enter age">
-	<br>
-	<br>
-	<input type="date" ngModel name="dob" placeholder="dob" placeholder="enter dob">
-	<br>
-	<br>
-	<p>Please select your gender:</p>
-	  <input type="radio" ngModel name="gender" value="male">
-	  <label for="male">MALE</label><br>
-	  <input type="radio" ngModel name="gender" value="female">
-	  <label for="female">FEMALE</label>
-	<br>
-	<br>
-	<button type="submit">submit</button>
-    
+  <br />
+  <br />
+  <input type="text" ngModel name="name" placeholder="enter your name" />
+  <br />
+  <br />
+  <input type="text" ngModel name="age" placeholder="enter age" />
+  <br />
+  <br />
+  <input
+    type="date"
+    ngModel
+    name="dob"
+    placeholder="dob"
+    placeholder="enter dob"
+  />
+  <br />
+  <br />
+  <p>Please select your gender:</p>
+    <input type="radio" ngModel name="gender" value="male" />  
+  <label for="male">MALE</label><br />
+    <input type="radio" ngModel name="gender" value="female" />  
+  <label for="female">FEMALE</label>
+  <br />
+  <br />
+  <button type="submit">submit</button>
 </form>
-<br>
-<br>
-
+<br />
+<br />

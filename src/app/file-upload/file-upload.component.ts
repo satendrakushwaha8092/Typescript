@@ -1,13 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpProviderService } from '../Service/http-provider.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-file-upload',
+  selector: '[app-file-upload]',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
-export class FileUploadComponent {
+export class FileUploadComponent implements OnInit {
 
-  constructor() { }
+  // @Input('app-file-upload') inData: any;
+
+  constructor(
+    private router: Router,
+    private httpProvider: HttpProviderService,
+  ) {}
+
+   ngOnInit(): void {
+  //   console.log(this.inData);
+   }
 
   uploadedImage: any;
   dbImage: any;
@@ -22,28 +33,37 @@ export class FileUploadComponent {
   imageUploadAction() {
     const imageFormData = new FormData();
     imageFormData.append('image', this.uploadedImage, this.uploadedImage.name);
+    console.log( this.uploadedImage, this.uploadedImage.name)
 
 
-    // this.httpClient.post('http://localhost:8080/upload/image/', imageFormData, { observe: 'response' })
-    //   .subscribe((response) => {
-        if (200 === 200) {
-          this.postResponse ="qqqqqqqqqqqqqqqqqqqq";
-          // this.successResponse = this.postResponse.body.message;
-        } else {
-          this.successResponse = 'Image not uploaded due to some error!';
+    this.httpProvider.uploadFile(imageFormData).subscribe(
+      (data: any) => {
+        if (data != null && data.body != null) {
+          //if (resultData != null && resultData.isSuccess) {
+          
+          setTimeout(() => {
+            this.router.navigate(['/Home']);
+          }, 1000);
+          //}
         }
-      // }
-      // );
-    }
+      },
+      async (error) => {
+        //this.toastr.error(error.message);
+        setTimeout(() => {
+          this.router.navigate(['/Home']);
+        }, 1000);
+      }
+    );
+  }
 
-   viewImage() {
-  //   this.httpClient.get('http://localhost:8080/get/image/info/' + this.image)
-  //     .subscribe(
-  //       res => {
-          this.postResponse = "qqqqqqqqqqqqqqqqqqqq";
-          this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
-  //       }
-  //     );
-  // }
-}
+//    viewImage() {
+//   //   this.httpClient.get('http://localhost:8080/get/image/info/' + this.image)
+//   //     .subscribe(
+//   //       res => {
+//           this.postResponse = "qqqqqqqqqqqqqqqqqqqq";
+//           this.dbImage = 'data:image/jpeg;base64,' + this.postResponse.image;
+//   //       }
+//   //     );
+//   // }
+// }
 }

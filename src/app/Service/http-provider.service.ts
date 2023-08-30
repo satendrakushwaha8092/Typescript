@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WebApiService } from './web-api.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -8,11 +7,12 @@ var apiUrl = "http://localhost:3000/";
 
 var httpLink = {
   getAllUser: apiUrl + "/api/user/getAllUser",
-  deleteUserById: apiUrl + "/api/user/deleteUserById",
+  deleteUserById: apiUrl + "user",
   getUserDetailById: apiUrl + "user",
   saveUser: apiUrl + "add",
   loginUser: apiUrl + "login",
-  updateUser: apiUrl + "update"
+  updateUser: apiUrl + "update",
+  upload: apiUrl + "upload",
 }
 @Injectable({
   providedIn: 'root'
@@ -58,5 +58,11 @@ export class HttpProviderService implements OnInit {
   } 
   public updateUser(id:any,model: any): Observable<any> {
     return this.webApiService.put(httpLink.updateUser+ '/' + id, model, {headers:this.head});
+  }
+  public uploadFile(model: any): Observable<any> {
+    return this.webApiService.post(httpLink.upload, model);
+  }
+  public deleteUser(id:any): Observable<any> {
+    return this.webApiService.delete(httpLink.deleteUserById+ '/' + id);
   }  
 }                          

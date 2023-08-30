@@ -21,6 +21,10 @@ interface FlatTreeNode {
 })
 export class TreeComponent {
 
+  sendData = {
+    name: 'Arpit',
+    };
+
   treeControl = new FlatTreeControl<FlatTreeNode>(
     node => node.level,
     node => node.expandable

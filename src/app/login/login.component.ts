@@ -1,11 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpProviderService } from '../Service/http-provider.service';
+import { ToastService } from '../Service/toast.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +10,11 @@ import { HttpProviderService } from '../Service/http-provider.service';
 export class LoginComponent implements OnInit {
   check = false;
 
-  constructor(private router: Router, private httpProvider: HttpProviderService,) {}
+  constructor(
+    private router: Router,
+    private httpProvider: HttpProviderService,
+    public toastService: ToastService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -23,18 +23,20 @@ export class LoginComponent implements OnInit {
   token: any;
 
   login(data: any) {
-
-    let header=new HttpHeaders().set("Authorization", "Bearer " + "qqqqqqqqqqqqqqqqqqq");         
-
     this.httpProvider.loginUser(data).subscribe(
       (userData: any) => {
-        this.token=userData.token;
-        localStorage.setItem('token',this.token)
+        this.token = userData.token;
+        localStorage.setItem('token', this.token);
         console.log(userData.token);
         // Handle the retrieved user data here
         if (userData.response == 'success') {
-           setTimeout(() => {
-            this.router.navigate(['/ViewUser/'+userData.userId]);
+          this.toastService.show('you are successfully login', {
+            classname: 'bg-success text-light',
+            delay: 2000,
+          });
+
+          setTimeout(() => {
+            this.router.navigate(['/ViewUser/' + userData.userId]);
           }, 500);
         }
       },
