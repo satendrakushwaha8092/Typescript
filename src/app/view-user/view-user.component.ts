@@ -10,6 +10,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-view-user',
   templateUrl: './view-user.component.html',
@@ -20,28 +21,30 @@ export class ViewUserComponent implements OnInit {
 
   userId: any;
   userDetail: any = [];
+  token:any;
 
   constructor(
     private rout: Router,
     private route: ActivatedRoute,
     private httpProvider: HttpProviderService,
     public toastService: ToastService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public  authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.params['Id'];
+    // this.userId = this.route.snapshot.params['Id'];
     this.getUserDetailById();
   }
 
   getUserDetailById() {
-    this.httpProvider.getUserDetailById(this.userId).subscribe((data: any) => {
+    this.httpProvider.getUserDetailById().subscribe((data: any) => {
       this.userDetail = data;
     });
   }
 
   updateUser() {
-    this.rout.navigate(['EditUser/' + this.userDetail.id]);
+    this.rout.navigate(['EditUser']);
   }
 
   openDialog(
@@ -54,6 +57,14 @@ export class ViewUserComponent implements OnInit {
       exitAnimationDuration,
     });
   }
+
+  logout() {
+    this.token = localStorage.clear();
+    this.authService.check2()
+    this.rout.navigate(['/Home']);
+    console.log(this.token);
+  
+   }
 }
 
 @Component({
@@ -68,15 +79,22 @@ export class DialogAnimationsExampleDialog {
     public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
     private httpProvider: HttpProviderService,
     public toastService: ToastService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    public  authService: AuthService
+
   ) {}
   deleteUser() {
-    this.httpProvider.deleteUser(2).subscribe((data: any) => {
+    this.httpProvider.deleteUser().subscribe((data: any) => {
       this.userDetail = data;
     });
     this.toastService.show('user deleted successfully', {
       classname: 'bg-success text-light',
       delay: 2000,
     });
+    localStorage.clear();
+    this.authService.check2()
+    this.router.navigate(['/Home']);
   }
+
 }

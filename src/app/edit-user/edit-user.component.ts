@@ -32,7 +32,7 @@ export class EditUserComponent implements OnInit{
   }
 
   updateUser(data: any) {       
-    this.httpProvider.updateUser(this.userId,data).subscribe((data : any) => {      
+    this.httpProvider.updateUser(data).subscribe((data : any) => {      
       if (data != null && data.body != null) {
         var resultData = data.body;
         if (resultData) {
@@ -50,7 +50,7 @@ export class EditUserComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       console.log( result);
-      this.httpProvider.updateUser(this.userId,{name:result}).subscribe((data : any) => {      
+      this.httpProvider.updateUser({name:result}).subscribe((data : any) => {      
         if (data != null && data.body != null) {
           var resultData = data.body;
           if (resultData) {

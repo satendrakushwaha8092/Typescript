@@ -48,6 +48,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DialogComponent } from './dialog/dialog.component';
 import { ToastsContainer } from './toast-global/toasts.container.components';
 import { RemoveUserComponent } from './remove-user/remove-user.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,7 @@ import { RemoveUserComponent } from './remove-user/remove-user.component';
     TabComponent,
     DialogComponent,
     RemoveUserComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +97,7 @@ import { RemoveUserComponent } from './remove-user/remove-user.component';
     NgTemplateOutlet,
     NgFor,
   ],
-  providers: [HttpProviderService],
+  providers: [HttpProviderService,AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -15,13 +15,14 @@ import { TabComponent } from './tab/tab.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { PracticeComponent } from './practice/practice.component';
 import { RemoveUserComponent } from './remove-user/remove-user.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  //  { path: '', redirectTo: 'Home', pathMatch: 'full'},
+  { path: '', redirectTo: 'Home', pathMatch: 'full'},
   { path: 'Home', component: HomeComponent },
-  { path: 'ViewUser/:Id', component: ViewUserComponent },
+  { path: 'ViewUser', component: ViewUserComponent },
   { path: 'AddUser', component: AddUserComponent },
-  { path: 'EditUser/:Id', component: EditUserComponent },
+  { path: 'EditUser', component: EditUserComponent, canActivate:[AuthGuard] },
   { path: 'toast', component: NgbdToastGlobal },
   { path: 'login', component: LoginComponent },
   { path: 'resetpassword', component: ResetPasswordComponent } ,
@@ -31,7 +32,7 @@ const routes: Routes = [
   { path: 'tab', component: TabComponent },
   { path: 'dialog', component: DialogComponent },
   { path: 'practice', component: PracticeComponent },
-  { path: 'remove-user', component: RemoveUserComponent },
+  { path: 'remove-user', component: RemoveUserComponent, canActivate:[AuthGuard] },
 
 ];
 
