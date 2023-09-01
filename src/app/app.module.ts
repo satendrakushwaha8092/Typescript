@@ -51,6 +51,9 @@ import { RemoveUserComponent } from './remove-user/remove-user.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import { LogoutComponent } from './logout/logout.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ProductComponent } from './product/product.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +71,9 @@ import { LogoutComponent } from './logout/logout.component';
     DialogComponent,
     RemoveUserComponent,
     LogoutComponent,
+    NavBarComponent,
+    ProductComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

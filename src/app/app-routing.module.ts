@@ -16,9 +16,12 @@ import { DialogComponent } from './dialog/dialog.component';
 import { PracticeComponent } from './practice/practice.component';
 import { RemoveUserComponent } from './remove-user/remove-user.component';
 import { AuthGuard } from './auth/auth.guard';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ProductComponent } from './product/product.component';
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'Home', pathMatch: 'full'},
+  { path: '', redirectTo: 'header', pathMatch: 'full'},
   { path: 'Home', component: HomeComponent },
   { path: 'ViewUser', component: ViewUserComponent },
   { path: 'AddUser', component: AddUserComponent },
@@ -33,6 +36,9 @@ const routes: Routes = [
   { path: 'dialog', component: DialogComponent },
   { path: 'practice', component: PracticeComponent },
   { path: 'remove-user', component: RemoveUserComponent, canActivate:[AuthGuard] },
+  { path: 'nav-bar', component:  NavBarComponent},
+  { path: 'product', component:  ProductComponent},
+  { path: 'header', component:  HeaderComponent},
 
 ];
 

@@ -1,0 +1,35 @@
+<p>product works!</p>
+
+<div>
+  <h6>Body only</h6>
+  <ul *ngFor="let product of products; index as i">
+    <ngb-toast [autohide]="false">
+      <hr />
+      <li>
+        <p>
+            <img src="\assets\product_images\Screenshot 2023-09-01 123526.png">
+            {{product.description}}
+          <b
+            ><del>₹:{{ product.price/10*12 }}</del
+            ><br />₹:{{ product.price }}</b
+          >
+        </p>
+      </li>
+      <hr />
+      <button style="width: 50%" (click)="myCart(product)">ADD TO CART</button>
+      <!-- <button style="width:20%" (click)="myCart(product)">+</button> 
+            <button (click)="myCart(product)">-</button>  -->
+      <!-- <input class="w3-button w3-black" type="button" value="Input Button"> -->
+    </ngb-toast>
+  </ul>
+
+  <button>show my cart</button>
+  <!-- <h6 class="mt-4">With a text header</h6>
+	<ngb-toast *ngIf="show" header="Hello" [autohide]="false" (hidden)="show=false">
+		I am a simple static toast with a header.
+	</ngb-toast> -->
+</div>
+
+<div>
+    
+</div>
