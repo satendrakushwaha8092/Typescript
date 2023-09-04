@@ -1,35 +1,73 @@
-<p>product works!</p>
+<nav>
+  <a href="#"><b>1234567890</b></a
+  >&nbsp;&nbsp;&nbsp; <a href="#">support@gmail.com</a>&nbsp;&nbsp;&nbsp;
+  <a style="text-align: centre">Free shopping in orderders above 500</a
+  >&nbsp;&nbsp;&nbsp; <a href="#">FAQs</a>&nbsp;&nbsp;&nbsp;
+  <a href="#">Blog</a>&nbsp;&nbsp;&nbsp;
+  <a href="#">About Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="#">Login or Create An Account</a>&nbsp;&nbsp;&nbsp;
+</nav>
 
-<div>
+<main>
+  <section>
+    <p>
+      QUARTZ <br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; COMPONENTS
+    </p>
+  </section>
+</main>
+
+<div class="second">
+  <a href="#">HOME</a>&nbsp; <a href="#">BLOG</a>&nbsp;
+  <a href="#">PRODUCTS</a>&nbsp; <a href="#">TRACK ORDER</a>&nbsp;
+  <a href="#">CONTACT</a>&nbsp; <a href="#">BULK ORDER</a>&nbsp;
+  <a href="#">DISCOUNT SALE</a>&nbsp; <a href="#">CONTEST</a>&nbsp;
+</div>
+
+<section>
+  <img
+    src="\assets\product_images\pexels-pixabay-163073.jpg"
+    height="400"
+    width="1500"
+  />
+</section>
+
+<!-- <div>
   <h6>Body only</h6>
   <ul *ngFor="let product of products; index as i">
     <ngb-toast [autohide]="false">
       <hr />
       <li>
         <p>
-            <img src="\assets\product_images\Screenshot 2023-09-01 123526.png">
-            {{product.description}}
+          <img src="\assets\product_images\Screenshot 2023-09-01 123526.png" />
+          {{ product.description }}
           <b
-            ><del>₹:{{ product.price/10*12 }}</del
+            ><del>₹:{{ (product.price / 10) * 12 }}</del
             ><br />₹:{{ product.price }}</b
           >
         </p>
       </li>
       <hr />
-      <button style="width: 50%" (click)="myCart(product)">ADD TO CART</button>
-      <!-- <button style="width:20%" (click)="myCart(product)">+</button> 
-            <button (click)="myCart(product)">-</button>  -->
-      <!-- <input class="w3-button w3-black" type="button" value="Input Button"> -->
     </ngb-toast>
   </ul>
+</div> -->
 
-  <button>show my cart</button>
-  <!-- <h6 class="mt-4">With a text header</h6>
-	<ngb-toast *ngIf="show" header="Hello" [autohide]="false" (hidden)="show=false">
-		I am a simple static toast with a header.
-	</ngb-toast> -->
+<div class="grid-container">
+    <ul *ngFor="let product of products; index as i">
+      <ngb-toast [autohide]="false">
+        <hr />
+        <li>
+          <p>
+            <img src="\assets\product_images\Screenshot 2023-09-01 123526.png" />
+            {{ product.description }}
+            <b
+              ><del>₹:{{ (product.price / 10) * 12 }}</del
+              ><br />₹:{{ product.price }}</b
+            >
+          </p>
+        </li>
+        <hr />
+      </ngb-toast>
+    </ul>
 </div>
-
-<div>
-    
-</div>
+<div></div>

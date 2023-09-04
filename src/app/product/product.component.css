@@ -1,0 +1,59 @@
+
+
+p::first-line{
+  color: white;
+  font-size:xx-large;
+  font-family:serif;
+  padding: 5px;
+}
+
+p {
+  color:orange;
+  background-color:rgb(57, 57, 57);
+  padding: 10px;
+  margin-block-end: auto;
+  margin-block-start: auto;
+}
+
+a {
+  color:black;
+  text-decoration:none;
+}
+
+nav{
+  background-color:rgb(194, 193, 193);
+  padding: 10px;
+}
+
+a:hover{
+  color:orange;
+  text-decoration:underline;
+}
+
+div{
+  background-color:white;
+  padding: 8px;
+  font-weight:1;
+  word-spacing: 18px;
+  font-size: 12px;
+}
+
+img:hover {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color:white;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
