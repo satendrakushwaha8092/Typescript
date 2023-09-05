@@ -1,0 +1,61 @@
+<nav>
+  <a href="#" id="contactno"><b>1234567890</b></a
+    >&nbsp;&nbsp;&nbsp;
+    <a href="#" id="email">support@gmail.com</a>&nbsp;&nbsp;&nbsp;
+    <a id="freeshipping">Free shopping in orderders above 500</a
+    >&nbsp;&nbsp;&nbsp; <a id="faq" href="#">FAQs</a>&nbsp;&nbsp;&nbsp;
+    <a href="#" id="blog">Blog</a>&nbsp;&nbsp;&nbsp;
+    <a href="#" id="aboutus">About Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" id="login">Login or Create An Account</a>&nbsp;&nbsp;&nbsp;
+  </nav>
+  
+    <div class="searchbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <p id="company">
+        QUARTZ <br />
+        &nbsp; COMPONENTS
+              </p>
+        </li>
+        </ul>
+      <form class="form-inline my-2 my-lg-0 searchbartitlr">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      </form>
+    </div>
+
+  
+  <div class="second">
+    <a href="#">HOME</a>&nbsp; <a href="#">BLOG</a>&nbsp;
+    <a href="#">PRODUCTS</a>&nbsp; <a href="#">TRACK ORDER</a>&nbsp;
+    <a href="#">CONTACT</a>&nbsp; <a href="#">BULK ORDER</a>&nbsp;
+    <a href="#">DISCOUNT SALE</a>&nbsp; <a href="#">CONTEST</a>&nbsp;
+  </div>
+  
+  <section>
+    <img
+      src="\assets\product_images\pexels-pixabay-163073.jpg"
+      height="400"
+      width="1500"
+    />
+  </section>
+  
+  <div class="grid-container">
+      <ul *ngFor="let product of products; index as i">
+        <ngb-toast [autohide]="false">
+          <hr />
+          <li>
+            <p>
+              <img src="\assets\product_images\Screenshot 2023-09-01 123526.png" />
+              {{ product.description }}
+              <b
+                ><del>₹:{{ (product.price / 10) * 12 }}</del
+                ><br />₹:{{ product.price }}</b
+              >
+              <button  (click)="myCart(product)">add to cart</button>
+            </p>
+          </li>
+          <hr />
+        </ngb-toast>
+      </ul>
+  </div>
+  
