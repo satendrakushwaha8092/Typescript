@@ -1,0 +1,6 @@
+h2{
+    color: blue
+}
+p::first-line{
+    color: rgb(128, 4, 0)
+}

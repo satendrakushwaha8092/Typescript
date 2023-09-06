@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* body{
+            color:red;
+            text-align: center;
+        } */
+        .info a{
+            color:inherit
+        }
+        .aboutus a{
+            color:inherit
+        }
+        .contactus a{
+            color:initial
+        }
+        .login a{
+            color:reset
+        }
+        .para{
+            border:2px solid black;
+            font-size: 150%;
+            /* width:500px;
+            height: 100px; */
+            overflow: auto;
+        }
+        img{
+            height: 500px;
+            object-fit:cover;
+        }
+        div:hover{
+        color:orange;
+        text-align: left;
+        }
+        .resize{
+            clip-path: circle(30% at 50% 50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="para">Abstraction is the concept of object-oriented programming that 
+        “shows” only essential attributes and “hides” unnecessary information. The main 
+        purpose of abstraction is hiding the unnecessary details from the users. Abstraction 
+        is selecting data from a larger pool to show only relevant details of the object to the user. 
+        It helps in reducing programming complexity and efforts. It is one of the most important concepts of 
+        OOPs.Abstraction is the concept of object-oriented programming that “shows” only essential attributes and “hides” unnecessary information. 
+        The main purpose of abstraction is hiding the unnecessary details from the users. 
+        Abstraction is selecting data from a larger pool to show only relevant details of the object to the user. 
+        It helps in reducing programming complexity and efforts. It is one of the most important concepts of OOPs.</div>
+
+    <ul>
+        <li><a href="">HOME</li>
+        <li class="info"><a href="">INFO</li>
+        <li class="aboutus"><a href="">ABOUTUS</li>
+        <li class="contactus"><a href="">CONTACTUS</li>
+        <li class="login"><a href="">LOGIN</li>
+    </ul>
+    <img class="resize" src=".\images\pexels-pixabay-163073.jpg">
+    <button>submit</button>
+</body>
+</html>
