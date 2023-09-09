@@ -20,17 +20,17 @@ p {
     margin-block-start: auto;
 }
 
-a {
-    color:black;
-    text-decoration:none;
-}
-
 nav{
     background-color:rgb(194, 193, 193);
     padding: 10px;
 }
 
-a:hover{
+nav a {
+    color:black;
+    text-decoration:none;
+}
+
+nav a:hover{
     color:orange;
     text-decoration:underline;
 }
@@ -43,7 +43,12 @@ a:hover{
     font-size: 12px;
 }
 
+.second a {
+    color:black;
+    text-decoration:none;
+}
+/* 
 img:hover {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
-  }
+  } */

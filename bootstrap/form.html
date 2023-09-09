@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../images/pexels-pixabay-163073.jpg">
+    <title>Document</title>
+    <style>
+        body{
+            font-family:'Courier New', Courier, monospace ;
+            margin: 20px 30px;
+            font-size: 17px;
+            padding: 5px;
+        }
+        .container{
+            background-color: rgb(221, 220, 220);
+            padding: 30px  40px 50px 40px ;
+            border:2px solid rgb(54, 54, 54);
+            border-radius:15px;
+            font-weight:bold
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select,
+        textarea{
+            width: 100%;
+            padding: 8px;
+            border: 1px solid rgb(50, 50, 50);
+            border-radius:5px;
+            margin: 10px;
+        }
+
+        input[type="search"],
+        select,
+        textarea{
+            width: 70%;
+            padding: 10px;
+            border: 1px solid rgb(50, 50, 50);
+            border-radius:5px;
+        }
+
+        input[type="search"]+button,
+        select,
+        textarea{
+            width: 10%;
+            padding: 10px;
+            border: 1px solid rgb(50, 50, 50);
+            border-radius:5px;
+        }
+
+        fieldset{
+            background-color:rgb(204, 204, 204);
+            border-radius: 5px;
+        }
+
+        input[type="submit"]{
+            color:red;
+            background-color:blue;
+            width: 100%;
+            padding: 12px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>
+        Name:<input type="text" name="name" placeholder="enter your name" />
+      </p>
+      <p>
+        <fieldset>
+            <legend>gender</legend>
+        male<input type="radio" name="gender" value="male" />
+        <br>
+        female<input type="radio" name="gender" value="male" />
+    </fieldset>
+    </p>
+    <p>
+        Email:<input type="email" name="email" placeholder="enter your email" />
+      </p>
+      <p>
+        Password:<input type="password" name="password" placeholder="enter your password" />
+      </p>
+      <p>Card Type:
+        <select name="cardType" id="cardType">
+            <option value="">select your choice</option>
+            <option value="visa">visa</option>
+            <option value="mastercard">master card</option>
+            <option value="rypay">rupay</option>            
+        </select>
+    </p>
+    <p>
+        <input type="search">
+        <button>search</button>
+    </p>
+    <input type="submit" value="submit">
+
+    <p>
+        <input type="reset" value="Reset">
+    </p>
+    <p>
+        <label for="quantity">Quantity (between 1 and 5):</label>
+  <input type="number" id="quantity" name="quantity" min="1" max="5">
+    </p>
+    </div>
+  </body>
+</html>
