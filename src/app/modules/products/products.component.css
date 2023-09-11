@@ -101,3 +101,40 @@ p::first-line{
   nav #login {
     padding-left: 20px;
   }
+
+
+
+
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+  }
+
+  .flex-item {
+    /* width: 75px;
+    height: 75px; */
+    padding: 10px;
+    margin: 2px;
+  }
+  #flex-item-1 {
+    background-color: blue;
+  }
+  #flex-item-2 {
+    background-color: rgb(54, 54, 254);
+  }
+  #flex-item-3 {
+    background-color: rgb(107, 107, 255);
+  }
+  #flex-item-4 {
+    background-color: rgb(168, 168, 254);
+  }
+  #flex-item-5 {
+    background-color: rgb(226, 226, 255);
+  }
+  #flex-item-6 {
+    background-color: rgb(220, 220, 239);
+  }
+  #flex-item-7 {
+    background-color: rgb(217, 217, 222);
+  }

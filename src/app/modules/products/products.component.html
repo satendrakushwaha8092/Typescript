@@ -6,7 +6,8 @@
     >&nbsp;&nbsp;&nbsp; <a id="faq" href="#">FAQs</a>&nbsp;&nbsp;&nbsp;
     <a href="#" id="blog">Blog</a>&nbsp;&nbsp;&nbsp;
     <a href="#" id="aboutus">About Us</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="#" id="login">Login or Create An Account</a>&nbsp;&nbsp;&nbsp;
+    <button (click)="login()">login</button>
+    <!-- <a href="#" id="login">Login or Create An Account</a>&nbsp;&nbsp;&nbsp; -->
   </nav>
   
     <div class="searchbar">
@@ -38,13 +39,63 @@
       width="1500"
     />
   </section>
+
+
+  <div class="flex-container">
+    <ul *ngFor="let product of products; index as i">
+    <div class="flex-item" id="flex-item-1">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          src="\assets\product_images\pexels-pixabay-163073.jpg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
+            provident!
+          </p>
+          <button style="width: 14rem">add to cart</button>
+        </div>
+      </div>
+    </div>
+  </ul>
+</div>
+
+
+
+<!-- <div>
+	<h6>Body only</h6>
+	<ngb-toast [autohide]="false"> I am a simple static toast. </ngb-toast>
+
+	<h6 class="mt-4">With a text header</h6>
+	<ngb-toast *ngIf="show" header="Hello" [autohide]="false" (hidden)="show=false">
+		I am a simple static toast with a header.
+	</ngb-toast>
+</div> -->
+
   
-  <div class="grid-container">
+  <!-- <div class="grid-container">
       <ul *ngFor="let product of products; index as i">
         <ngb-toast [autohide]="false">
-          <hr />
           <li>
-            <p>
+            <div class="flex-item" id="flex-item-1">
+              <div class="card" style="width: 18rem">
+                <img
+                  class="card-img-top"
+                  src="../images/pexels-pixabay-163073.jpg"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <p class="card-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
+                    provident!
+                  </p>
+                  <button style="width: 14rem">add to cart</button>
+                </div>
+              </div>
+            </div> -->
+            <!-- <p>
               <img src="\assets\product_images\Screenshot 2023-09-01 123526.png" />
               {{ product.description }}
               <b
@@ -52,10 +103,10 @@
                 ><br />₹:{{ product.price }}</b
               >
               <button  (click)="myCart(product)">add to cart</button>
-            </p>
-          </li>
+            </p> -->
+          <!-- </li>
           <hr />
         </ngb-toast>
       </ul>
-  </div>
+  </div> -->
   

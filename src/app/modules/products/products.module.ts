@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTreeModule } from '@angular/material/tree';
 
@@ -16,7 +16,9 @@ import { MatTreeModule } from '@angular/material/tree';
     CommonModule,
     ProductsRoutingModule,
     NgbModule,
-    MatTreeModule
+    MatTreeModule,
+    NgbToastModule,
+    NgIf
   ]
 })
 export class ProductsModule { }

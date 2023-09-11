@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
+  show = false;
+  login(){
+    console.log("login")
+    this.show=true
+
+  }
   products=[
     {
       id:1,
@@ -75,3 +81,5 @@ constructor() {}
   }
 
 }
+
+
