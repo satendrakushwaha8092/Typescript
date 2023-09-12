@@ -6,6 +6,8 @@ import { ProductsComponent } from './products.component';
 import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MatTreeModule } from '@angular/material/tree';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { MatTreeModule } from '@angular/material/tree';
     NgbModule,
     MatTreeModule,
     NgbToastModule,
-    NgIf
+    NgIf,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class ProductsModule { }

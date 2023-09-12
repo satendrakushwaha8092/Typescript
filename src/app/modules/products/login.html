@@ -1,9 +1,30 @@
-<div>
-	<h6>Body only</h6>
-	<ngb-toast [autohide]="false"> I am a simple static toast. </ngb-toast>
 
-	<h6 class="mt-4">With a text header</h6>
-	<ngb-toast *ngIf="show" header="Hello" [autohide]="false" (hidden)="show=false">
-		I am a simple static toast with a header.
-	</ngb-toast>
-</div>
+<mat-dialog-actions align="end">
+	<p style="padding-right:30px; padding-top:20px">CUSTOMER LOGIN</p>
+	<button mat-button mat-dialog-close>x</button>
+  </mat-dialog-actions>
+  
+  
+  <mat-dialog-content class="mat-typography">
+  
+	<div class="container">
+	<p>
+		Email:<br><input type="email" name="email" placeholder="enter your email" />
+	</p>
+	<p>
+		Password:<br><input type="password" name="password" placeholder="enter your password" />
+	</p>
+	</div>
+  
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+	<button style="width:250px" mat-button [mat-dialog-close]="true" cdkFocusInitial>submit</button>
+
+  </mat-dialog-actions>
+
+  <mat-dialog-actions align="end">
+	<button style="width:250px" mat-button [mat-dialog-close]="true" cdkFocusInitial>CREATE A NEW ACCOUNT</button>
+
+  </mat-dialog-actions>
+  
