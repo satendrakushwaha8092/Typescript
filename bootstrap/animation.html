@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .gola {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        overflow: auto;
+        transition: width 5s, text-decoration 5s;
+      }
+
+      .gola:hover {
+        width: 100%;
+        text-decoration: underline;
+      }
+
+      .under {
+        text-decoration: none; /* Initially, no underline */
+        transition: text-decoration 2s ease-in-out, color 2s; /* Add the transition to the text-decoration property */
+      }
+
+      .under:hover {
+        text-decoration: underline; /* Underline when hovered */
+        color: aqua;
+      }
+
+      .anibutton{
+        width: 150px;
+      }
+      .anibutton:hover {
+        color: aqua;
+        background-color:rebeccapurple;
+        padding-left: 110px;
+      }
+
+      .buttonshift{
+        padding-left:150px;
+      }
+
+      .buttonshift:hover {
+        padding-left: 200px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="gola"><h1>animation</h1></div>
+    <div class="under">underline</div>
+    <div class="buttonshift"><button>submit</button></div>
+  </body>
+</html>
