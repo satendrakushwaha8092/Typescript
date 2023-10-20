@@ -2,10 +2,10 @@ const ExcelJS = require("exceljs");
 const XLSX = require("xlsx");
 const moment = require("moment");
 
-const sourceWorkbookPath = "../target3.xlsx"; // Replace with the path to your source Excel file
+const sourceWorkbookPath = "../target4.xlsx"; // Replace with the path to your source Excel file
 const pnlWorkbookPath = "../FF IS - CJSC - 08.23.xlsx";
 const salesWorkbookPath = "../All live GL 2023.xlsx";
-const targetWorkbookPath = "../target4.xlsx"; // Replace with the path to your target Excel file
+const targetWorkbookPath = "../target5.xlsx"; // Replace with the path to your target Excel file
 const idealPercent = 21.79;
 
 const newpnLData = new ExcelJS.Workbook();
@@ -19,7 +19,7 @@ const workbookGL = XLSX.readFile(salesWorkbookPath);
 const sourceSheetName = workbookGL.SheetNames[0];
 const sheet = workbookGL.Sheets[sourceSheetName];
 
-const date = "18-09-2023"; //all dates depend on this
+const date = "2023-09-18T00:00:00.000Z"; //all dates depend on this
 const formattedStartDate = moment(date, "DD-MM-YYYY");
 const endDate = formattedStartDate.add(27, "days");
 const formattedEndDate = endDate.format("DD-MM-YYYY");
@@ -44,7 +44,11 @@ const copySheets = async () => {
 
       const existingSheet = targetWorkbook.getWorksheet(sourceSheet.name);
 
-      if (!existingSheet && sourceSheet.name != "Sales") {
+      if (
+        !existingSheet &&
+        sourceSheet.name != "Sales" &&
+        sourceSheet.name != "2023 JE UPLOAD CLEAN"
+      ) {
         // If the sheet doesn't exist in the target workbook, clone and add it
         const newTargetSheet = targetWorkbook.addWorksheet(sourceSheet.name, {
           properties: sourceSheet.properties,
@@ -56,7 +60,11 @@ const copySheets = async () => {
         if (sourceSheet.name == "P&L Data") {
           copypnlSheet(sourceSheet, newTargetSheet);
         } else if (sourceSheet.name == "Labor Standard Variance") {
-          copyLaborStandardVariance(sourceSheet, newTargetSheet, targetWorkbook);
+          copyLaborStandardVariance(
+            sourceSheet,
+            newTargetSheet,
+            targetWorkbook
+          );
         } else if (sourceSheet.name == "JE Upload ") {
           updateFormulaInJeUpload(sourceSheet, newTargetSheet);
         } else {
@@ -75,9 +83,119 @@ const copySheets = async () => {
     });
 
     // Save the updated target workbook
-    // targetWorkbook.calcProperties.fullCalcOnLoad = true;
+    targetWorkbook.calcProperties.fullCalcOnLoad = true;
 
-    // await targetWorkbook.xlsx.writeFile(targetWorkbookPath);
+    await targetWorkbook.xlsx.writeFile(targetWorkbookPath);
+
+    await sourceWorkbook.xlsx.readFile(targetWorkbookPath);
+
+    const jeUploadSheet = sourceWorkbook.getWorksheet("JE Upload ");
+
+    const addJeUploadClean = targetWorkbook.addWorksheet(
+      "2023 JE UPLOAD CLEAN"
+    );
+
+    const headerRow = addJeUploadClean.getRow(1);
+
+    // Add a blue background color to the header row (as shown in the previous example)
+    headerRow.eachCell((cell) => {
+      cell.fill = {
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "0000FF" }, // Blue color code
+      };
+    });
+
+    // Set the header text color to white (as shown in the previous example)
+    headerRow.eachCell((cell) => {
+      cell.font = {
+        color: { argb: "FFFFFF" }, // White color code
+      };
+    });
+
+    // Add text to a specific cell in the header row
+    headerRow.getCell(1).value = "BatchID";
+    headerRow.getCell(2).value = "Entity";
+    headerRow.getCell(3).value = "TranDate";
+    headerRow.getCell(4).value = "TransactionDescription";
+    headerRow.getCell(5).value = "SourceDocument";
+    headerRow.getCell(6).value = "TransactionType";
+    headerRow.getCell(7).value = "ReversingDate";
+    headerRow.getCell(8).value = "Account";
+    headerRow.getCell(9).value = "LineDescription";
+    headerRow.getCell(10).value = "Debit";
+    headerRow.getCell(11).value = "Credit";
+
+    let i = 1;
+
+    jeUploadSheet.eachRow((sourceRow, rowNum) => {
+      const value = jeUploadSheet.getCell(rowNum, 15).result;
+      const value2 = jeUploadSheet.getCell(rowNum, 16).result;
+
+      if ((value && !value2) || (!value && value2)) {
+        i++;
+        const newTargetRow = addJeUploadClean.getRow(i);
+        sourceRow.eachCell((cell, colNum) => {
+          if (colNum === 15) {
+            const newTargetCell = newTargetRow.getCell(10);
+            newTargetCell.value = {
+              formula: `=IF(L${i}>0,L${i},0)`,
+            };
+            newTargetCell.formula = `=IF(L${i}>0,L${i},0)`;
+            //newTargetCell.result = cell.result;
+          }
+
+          if (colNum === 16) {
+            const newTargetCell = newTargetRow.getCell(11);
+            newTargetCell.value = {
+              formula: `=-IF(L${i}<0,L${i},0)`,
+            };
+            newTargetCell.formula = `=-IF(L${i}<0,L${i},0)`;
+            //newTargetCell.result = cell.result;
+          }
+
+          if (colNum === 18) {
+            const newTargetCell = newTargetRow.getCell(12);
+            newTargetCell.value = {
+              formula: `=XLOOKUP(H${i},'JE Upload '!B:B,'JE Upload '!N:N,0,0,1)`,
+            };
+            newTargetCell.formula = `=XLOOKUP(H${i},'JE Upload '!B:B,'JE Upload '!N:N,0,0,1)`;
+            newTargetCell.result = cell.result;
+          }
+
+          if (colNum === 2) {
+            const newTargetCell = newTargetRow.getCell(8);
+            newTargetCell.value = cell.result;
+            newTargetCell.result = cell.result;
+          }
+
+          if (colNum === 17) {
+            const newTargetCell = newTargetRow.getCell(2);
+            newTargetCell.value = cell.result;
+          }
+
+          if (colNum === 3) {
+            const newTargetCell = newTargetRow.getCell(9);
+            newTargetCell.value = cell.result;
+          }
+
+          if (colNum === 10) {
+            const newTargetCell = newTargetRow.getCell(4);
+            newTargetCell.value = cell.result;
+          }
+
+          if (colNum === 5) {
+            const newTargetCell = newTargetRow.getCell(3);
+            newTargetCell.value = cell.result;
+          }
+        });
+      }
+    });
+
+    targetWorkbook.calcProperties.fullCalcOnLoad = true;
+
+    await targetWorkbook.xlsx.writeFile(targetWorkbookPath);
+
     console.log("Sheets copied to the target workbook.");
   } catch (error) {
     console.error("Error copying sheets:", error.message);
@@ -111,7 +229,11 @@ function copypnlSheet(sourceSheet, newTargetSheet) {
   });
 }
 
-function copyLaborStandardVariance(sourceSheet, newTargetSheet, targetWorkbook) {
+function copyLaborStandardVariance(
+  sourceSheet,
+  newTargetSheet,
+  targetWorkbook
+) {
   let tempColmunNum;
   sourceSheet.eachRow((sourceRow, rowNum) => {
     sourceRow.eachCell((cell, colNum) => {
@@ -152,7 +274,6 @@ function copyLaborStandardVariance(sourceSheet, newTargetSheet, targetWorkbook) 
   sourceSheet.eachRow((sourceRow, rowNum) => {
     const targetRow = newTargetSheet.getRow(rowNum);
     sourceRow.eachCell((cell, colNum) => {
-     
       if (colNum === 11 && rowNum > 7 && rowNum < 70) {
         //copy all style and result column of k in j column
         const targetCell = targetRow.getCell(colNum);
@@ -169,40 +290,22 @@ function copyLaborStandardVariance(sourceSheet, newTargetSheet, targetWorkbook) 
         targetCell.style = targetCell2.style;
         targetCell.width = cell.width;
       }
-      
-      if (colNum === 4 && rowNum === 4) {
-        const splitDate = date.split("-");
-        //update current month in column 3
-        const targetCell = targetRow.getCell(colNum - 1);
-        targetCell.value = `${splitDate[1]}/${splitDate[0]} to ${splitDate[1]}/${splitDate[0]}`;
-        targetCell.style = targetCell.style;
-      }
 
       if (colNum === 3 && rowNum === 4) {
-        const splitDate = date.split("-");
-        const newDate = new Date(
-          splitDate[2] - 1,
-          splitDate[0],
-          splitDate[1] + 2
-        ); // Year, Month (0-based), Day
         //update current month in column 3
         const targetCell = targetRow.getCell(colNum - 1);
-        targetCell.value = newDate;
+        targetCell.value = new Date(
+          moment(date).add(2, "months").format("YYYY-MM-DD")
+        );
         targetCell.style = targetCell.style;
-        console.log(newDate)
       }
 
-
       if (colNum === 11 && rowNum === 4) {
-        const splitDate = date.split("-");
-        const newDate = new Date(
-          splitDate[2] - 1,
-          splitDate[0],
-          splitDate[1] + 2
-        ); // Year, Month (0-based), Day
         //update current month in column 3
         const targetCell = targetRow.getCell(colNum - 1);
-        targetCell.value = newDate;
+        targetCell.value = new Date(
+          moment(date).add(2, "months").format("YYYY-MM-DD")
+        );
         targetCell.style = targetCell.style;
       }
 
@@ -230,8 +333,10 @@ function copyLaborStandardVariance(sourceSheet, newTargetSheet, targetWorkbook) 
           const targetCell2 = targetRow.getCell(colNum - 5);
           const targetCell3 = targetRow.getCell(colNum - 6);
           const formula = cell.formula;
-          const newFormula =
-            "=" + formula.replace(targetCell3.address, targetCell2.address);
+          const newFormula = formula.replace(
+            targetCell3.address,
+            targetCell2.address
+          );
           targetCell.value = {
             formula: newFormula,
           };
@@ -288,32 +393,42 @@ function copyLaborStandardVariance(sourceSheet, newTargetSheet, targetWorkbook) 
         targetCell.style = cell.style;
       }
 
-       if (colNum === 3 && rowNum == 2) {
+      if (colNum === 3 && rowNum == 2) {
         //copy all style and result column of k in j column
         const targetCell = targetRow.getCell(colNum);
-        targetCell.value = endDate.format("DD-MM-YYYY");
+        targetCell.value = moment(date).add(27, "days").format("DD-MM-YYYY");
         targetCell.style = cell.style;
       }
 
       if (colNum === 4 && rowNum == 2) {
         //copy all style and result column of k in j column
         const targetCell = targetRow.getCell(colNum);
-        targetCell.value = date;
+        targetCell.value = moment(date).format("DD-MM-YYYY");
         targetCell.style = cell.style;
       }
 
+      if (colNum === 3 && rowNum === 4) {
+        const splitDate = moment(date).format("DD-MM-YYYY").split("-");
+        const formattedEndDate = moment(date)
+          .add(27, "days")
+          .format("DD-MM-YYYY");
+        const splitDate2 = formattedEndDate.split("-");
+        //update current month in column 3
+        const targetCell = targetRow.getCell(colNum);
+        targetCell.value = `${splitDate[1]}/${splitDate[0]} to ${splitDate2[1]}/${splitDate2[0]}`;
+        targetCell.style = targetCell.style;
+      }
     });
 
     targetRow.height = sourceRow.height; // Preserve row height
     targetRow.width = sourceRow.width;
   });
-    targetWorkbook.getWorksheet(newTargetSheet);
+  targetWorkbook.getWorksheet(newTargetSheet);
 
-    // Hide the specified column by setting its style property
-    for (let i = 15; i < 90; i++) {
-      newTargetSheet.getColumn(i).hidden = true;
-    }
-    
+  // Hide the specified column by setting its style property
+  for (let i = 15; i < 90; i++) {
+    newTargetSheet.getColumn(i).hidden = true;
+  }
 }
 
 async function copySales() {
