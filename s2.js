@@ -99,6 +99,15 @@ const copySheets = async (
 };
 
 function copypnlSheet(sourceSheet, newTargetSheet, newpnLData, sourceSheetpnl) {
+
+  newTargetSheet.views = [
+    {
+      state: "frozen",
+      ySplit: 6, // Split after this row
+      xSplit: 5
+    },
+  ];
+
   sourceSheet.eachRow((sourceRow, rowNum) => {
     const newTargetRow = newTargetSheet.getRow(rowNum);
     sourceRow.eachCell((cell, colNum) => {
@@ -123,6 +132,10 @@ function copypnlSheet(sourceSheet, newTargetSheet, newpnLData, sourceSheetpnl) {
       }
     });
   });
+
+  const columnCount = newTargetSheet.columnCount
+  newTargetSheet.autoFilter = `A6:${getColumnAddress(columnCount)+newTargetSheet.rowCount}`;
+
 }
 
 function copyLaborStandardVariance(
@@ -157,17 +170,14 @@ function copyLaborStandardVariance(
     storeFormulaJeUploadGcolumn.push(formula);
   }
 
-  const frozenRows = [4, 5, 6, 7];
-  frozenRows.forEach((rowNumber) => {
-    //fix column
-    newTargetSheet.views = [
-      {
-        state: "frozen",
-        ySplit: rowNumber, // Split after this row
-      },
-    ];
-  });
-
+  newTargetSheet.views = [
+    {
+      state: "frozen",
+      ySplit: 7, // Split after this row
+      xSplit: 1
+    },
+  ];
+  
   // Copy each row (with style and values) from the source sheet to the cloned sheet
   sourceSheet.eachRow((sourceRow, rowNum) => {
     const targetRow = newTargetSheet.getRow(rowNum);
@@ -316,6 +326,12 @@ function copyLaborStandardVariance(
         targetCell.value = `${splitDate[1]}/${splitDate[0]} to ${splitDate2[1]}/${splitDate2[0]}`;
         targetCell.style = targetCell.style;
       }
+
+      if (colNum === 11 && rowNum === 7) {
+        const targetCell = targetRow.getCell(colNum);
+        targetCell.value = `Complete`
+        targetCell.style = targetCell.style;
+      }
     });
 
     targetRow.height = sourceRow.height; // Preserve row height
@@ -327,6 +343,11 @@ function copyLaborStandardVariance(
   for (let i = 15; i < 90; i++) {
     newTargetSheet.getColumn(i).hidden = true;
   }
+
+  newTargetSheet.getRow(7).hidden = true;
+
+  const columnCount = newTargetSheet.columnCount
+  newTargetSheet.autoFilter = `A6:${getColumnAddress(columnCount)+69}`;
 }
 
 function getColumnAddress(columnIndex) {
@@ -411,7 +432,7 @@ async function copyDataJeUploadToJeUploadClean(
 
   const addJeUploadClean = targetWorkbook.addWorksheet("2023 JE UPLOAD CLEAN");
 
-  const headerRow = addJeUploadClean.getRow(1);
+  const headerRow = addJeUploadClean.getRow(2);
 
   // Add text to a specific cell in the header row
   headerRow.getCell(1).value = "BatchID";
@@ -426,7 +447,7 @@ async function copyDataJeUploadToJeUploadClean(
   headerRow.getCell(10).value = "Debit";
   headerRow.getCell(11).value = "Credit";
 
-  let i = 1;
+  let i = 2;
 
   jeUploadSheet.eachRow((sourceRow, rowNum) => {
     const value = jeUploadSheet.getCell(rowNum, 15).result;
@@ -489,6 +510,23 @@ async function copyDataJeUploadToJeUploadClean(
       });
     }
   });
+
+  const newTargetRow = addJeUploadClean.getRow(1);
+  const newTargetCell = newTargetRow.getCell(10);
+  newTargetCell.value = { 
+  formula : `=SUBTOTAL(9,J3:J${i})`
+  }
+  newTargetCell.formula=`=SUBTOTAL(9,J3:J${i})`
+
+  const newTargetRow2 = addJeUploadClean.getRow(1);
+  const newTargetCell2 = newTargetRow2.getCell(11);
+  newTargetCell2.value = {
+    formula : `=SUBTOTAL(9,K3:K${i})`
+  }
+  newTargetCell2.formula = `=SUBTOTAL(9,K3:K${i})`
+
+  const columnCount = addJeUploadClean.columnCount
+  addJeUploadClean.autoFilter = `A2:${getColumnAddress(columnCount)+i}`;
 
   targetWorkbook.calcProperties.fullCalcOnLoad = true;
 
