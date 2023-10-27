@@ -2,8 +2,10 @@ const ExcelJS = require("exceljs");
 const XLSX = require("xlsx");
 const moment = require("moment");
 
-const storeRecentStandardFoodCostAddress = [];
-const storeFormulaJeUploadGcolumn = [];
+let storeRecentStandardFoodCostAddress = [];
+let storeFormulaJeUploadGcolumn = [];
+
+const idealPercent = 21.79;
 
 const copySheets = async (
   sourceWorkbookPath,
@@ -11,8 +13,6 @@ const copySheets = async (
   targetWorkbookPath,
   date
 ) => {
-  const idealPercent = 21.79;
-
   const newpnLData = new ExcelJS.Workbook();
   newpnLData.xlsx.readFile(pnlWorkbookPath);
 
@@ -40,11 +40,7 @@ const copySheets = async (
 
       const existingSheet = targetWorkbook.getWorksheet(sourceSheet.name);
 
-      if (
-        !existingSheet &&
-        sourceSheet.name != "Sales" &&
-        sourceSheet.name != "2023 JE UPLOAD CLEAN"
-      ) {
+      if (!existingSheet && sourceSheet.name != "2023 JE UPLOAD CLEAN") {
         // If the sheet doesn't exist in the target workbook, clone and add it
         const newTargetSheet = targetWorkbook.addWorksheet(sourceSheet.name, {
           properties: sourceSheet.properties,
@@ -60,7 +56,6 @@ const copySheets = async (
             sourceSheet,
             newTargetSheet,
             targetWorkbook,
-            idealPercent,
             date
           );
         } else if (sourceSheet.name == "JE Upload ") {
@@ -83,12 +78,7 @@ const copySheets = async (
     // Save the updated target workbook
     targetWorkbook.calcProperties.fullCalcOnLoad = true;
 
-    await targetWorkbook.xlsx.writeFile(targetWorkbookPath);
-
-    await sourceWorkbook.xlsx.readFile(targetWorkbookPath);
-
     const downloadFilePath = await copyDataJeUploadToJeUploadClean(
-      sourceWorkbook,
       targetWorkbook,
       targetWorkbookPath
     );
@@ -98,13 +88,18 @@ const copySheets = async (
   }
 };
 
-function copypnlSheet(sourceSheet, newTargetSheet, newpnLData, sourceSheetpnl) {
-
+const copypnlSheet = (
+  sourceSheet,
+  newTargetSheet,
+  newpnLData,
+  sourceSheetpnl
+) => {
+  console.log("copy all p & l data");
   newTargetSheet.views = [
     {
       state: "frozen",
       ySplit: 6, // Split after this row
-      xSplit: 5
+      xSplit: 5,
     },
   ];
 
@@ -133,18 +128,22 @@ function copypnlSheet(sourceSheet, newTargetSheet, newpnLData, sourceSheetpnl) {
     });
   });
 
-  const columnCount = newTargetSheet.columnCount
-  newTargetSheet.autoFilter = `A6:${getColumnAddress(columnCount)+newTargetSheet.rowCount}`;
+  const columnCount = newTargetSheet.columnCount;
+  newTargetSheet.autoFilter = `A6:${
+    getColumnAddress(columnCount) + newTargetSheet.rowCount
+  }`;
+};
 
-}
-
-function copyLaborStandardVariance(
+const copyLaborStandardVariance = (
   sourceSheet,
   newTargetSheet,
   targetWorkbook,
-  idealPercent,
   date
-) {
+) => {
+  console.log("copy all Labor Standard Variance data");
+  storeRecentStandardFoodCostAddress = [];
+  storeFormulaJeUploadGcolumn = [];
+
   let tempColmunNum;
   sourceSheet.eachRow((sourceRow, rowNum) => {
     sourceRow.eachCell((cell, colNum) => {
@@ -174,10 +173,10 @@ function copyLaborStandardVariance(
     {
       state: "frozen",
       ySplit: 7, // Split after this row
-      xSplit: 1
+      xSplit: 1,
     },
   ];
-  
+
   // Copy each row (with style and values) from the source sheet to the cloned sheet
   sourceSheet.eachRow((sourceRow, rowNum) => {
     const targetRow = newTargetSheet.getRow(rowNum);
@@ -217,7 +216,7 @@ function copyLaborStandardVariance(
         targetCell.style = targetCell.style;
       }
 
-      if (colNum > 10 && rowNum > 3) {
+      if (colNum > 10) {
         if (tempColmunNum == colNum) {
           const targetCell = targetRow.getCell(colNum + 1);
           targetCell.value = cell.value;
@@ -249,15 +248,6 @@ function copyLaborStandardVariance(
             formula: newFormula,
           };
           targetCell.formula = newFormula;
-          targetCell.style = cell.style;
-        } else if (tempColmunNum - 1 == colNum && rowNum == 71) {
-          const targetCell = targetRow.getCell(colNum + 1);
-          const sourceCell = sourceSheet.getCell(rowNum - 3, colNum + 1);
-          const sourceCell2 = sourceSheet.getCell(rowNum - 63, colNum + 1);
-          targetCell.value = {
-            formula: `=+SUM(${sourceCell.address}:${sourceCell2.address})`,
-          };
-          targetCell.formula = `=+SUM(${sourceCell.address}:${sourceCell2.address})`;
           targetCell.style = cell.style;
         } else if (tempColmunNum - 1 == colNum && rowNum == 72) {
           const targetCell = targetRow.getCell(colNum + 1);
@@ -291,7 +281,16 @@ function copyLaborStandardVariance(
           targetCell.style = cell.style;
         } else {
           const targetCell = targetRow.getCell(colNum + 1);
-          targetCell.value = cell.formula ? "=" + cell.formula : cell.value;
+          const formula = cell.formula;
+          targetCell.value =
+            cell.formula && rowNum == 71
+              ? {
+                  formula: formula.replaceAll(
+                    getColumnAddress(colNum),
+                    getColumnAddress(colNum + 1)
+                  ),
+                }
+              : cell.value;
           targetCell.style = cell.style;
         }
       } else {
@@ -299,6 +298,7 @@ function copyLaborStandardVariance(
         targetCell.value = cell.value;
         targetCell.formula = cell.formula;
         targetCell.style = cell.style;
+        targetCell.result = cell.result;
       }
 
       if (colNum === 3 && rowNum == 2) {
@@ -329,7 +329,7 @@ function copyLaborStandardVariance(
 
       if (colNum === 11 && rowNum === 7) {
         const targetCell = targetRow.getCell(colNum);
-        targetCell.value = `Complete`
+        targetCell.value = `Complete`;
         targetCell.style = targetCell.style;
       }
     });
@@ -346,11 +346,11 @@ function copyLaborStandardVariance(
 
   newTargetSheet.getRow(7).hidden = true;
 
-  const columnCount = newTargetSheet.columnCount
-  newTargetSheet.autoFilter = `A6:${getColumnAddress(columnCount)+69}`;
-}
+  const columnCount = newTargetSheet.columnCount;
+  newTargetSheet.autoFilter = `A6:${getColumnAddress(columnCount) + 69}`;
+};
 
-function getColumnAddress(columnIndex) {
+const getColumnAddress = (columnIndex) => {
   let columnAddress = "";
   while (columnIndex > 0) {
     const remainder = (columnIndex - 1) % 26;
@@ -358,9 +358,10 @@ function getColumnAddress(columnIndex) {
     columnIndex = Math.floor((columnIndex - 1) / 26);
   }
   return columnAddress;
-}
+};
 
-function updateFormulaInJeUpload(sourceSheet, newTargetSheet) {
+const updateFormulaInJeUpload = (sourceSheet, newTargetSheet) => {
+  console.log("update formula in je upload");
   sourceSheet.eachRow((sourceRow, rowNum) => {
     const newTargetRow = newTargetSheet.getRow(rowNum);
     sourceRow.eachCell((cell, colNum) => {
@@ -405,9 +406,9 @@ function updateFormulaInJeUpload(sourceSheet, newTargetSheet) {
       }
     });
   });
-}
+};
 
-function getTagetFileName(startDate) {
+const getTagetFileName = (startDate) => {
   const dateStr = startDate;
   const date = new Date(dateStr);
 
@@ -421,14 +422,13 @@ function getTagetFileName(startDate) {
   const fileName = `../downloads/CJ Labor Standard  food cost ${formattedDate}.xlsx`; // Output: "2023-08"
 
   return fileName;
-}
+};
 
-async function copyDataJeUploadToJeUploadClean(
-  sourceWorkbook,
+const copyDataJeUploadToJeUploadClean = async (
   targetWorkbook,
   targetWorkbookPath
-) {
-  const jeUploadSheet = sourceWorkbook.getWorksheet("JE Upload ");
+) => {
+  const jeUploadSheet = targetWorkbook.getWorksheet("JE Upload ");
 
   const addJeUploadClean = targetWorkbook.addWorksheet("2023 JE UPLOAD CLEAN");
 
@@ -513,69 +513,74 @@ async function copyDataJeUploadToJeUploadClean(
 
   const newTargetRow = addJeUploadClean.getRow(1);
   const newTargetCell = newTargetRow.getCell(10);
-  newTargetCell.value = { 
-  formula : `=SUBTOTAL(9,J3:J${i})`
-  }
-  newTargetCell.formula=`=SUBTOTAL(9,J3:J${i})`
+  newTargetCell.value = {
+    formula: `=SUBTOTAL(9,J3:J${i})`,
+  };
+  newTargetCell.formula = `=SUBTOTAL(9,J3:J${i})`;
 
   const newTargetRow2 = addJeUploadClean.getRow(1);
   const newTargetCell2 = newTargetRow2.getCell(11);
   newTargetCell2.value = {
-    formula : `=SUBTOTAL(9,K3:K${i})`
-  }
-  newTargetCell2.formula = `=SUBTOTAL(9,K3:K${i})`
+    formula: `=SUBTOTAL(9,K3:K${i})`,
+  };
+  newTargetCell2.formula = `=SUBTOTAL(9,K3:K${i})`;
 
-  const columnCount = addJeUploadClean.columnCount
-  addJeUploadClean.autoFilter = `A2:${getColumnAddress(columnCount)+i}`;
+  const columnCount = addJeUploadClean.columnCount;
+  addJeUploadClean.autoFilter = `A2:${getColumnAddress(columnCount) + i}`;
 
   targetWorkbook.calcProperties.fullCalcOnLoad = true;
 
   await targetWorkbook.xlsx.writeFile(targetWorkbookPath);
   console.log("Sheets copied to the target workbook.");
   return targetWorkbookPath;
-}
+};
 
-module.exports.copySales=async (
+module.exports.copySales = async (
+  sourceWorkbookPath,
+  pnlWorkbookPath,
+  salesWorkbookPath,
+  date
+) => {
+  const targetWorkbookPath = getTagetFileName(date);
+
+  const targetWorkbook2 = new ExcelJS.Workbook();
+  await targetWorkbook2.xlsx.writeFile(targetWorkbookPath);
+  const workbookGL = XLSX.readFile(salesWorkbookPath);
+  const sourceSheetName = workbookGL.SheetNames[0];
+  const sheet = workbookGL.Sheets[sourceSheetName];
+
+  const formattedStartDate = moment(date);
+  const endDate = formattedStartDate.add(27, "days");
+
+  console.log("filter data on sales sheet");
+  const startDate = moment(date);
+  const endDate2 = endDate;
+
+  const dataArray = XLSX.utils.sheet_to_json(sheet);
+  const newArr = dataArray.filter((row) => {
+    const serialDate = row["TRX Date"];
+    const excelStartDate = new Date(1900, 0, 1);
+    const date = new Date(
+      excelStartDate.getTime() + (serialDate - 2) * 24 * 60 * 60 * 1000
+    );
+    const formattedDate = moment(date).format("DD-MM-YYYY");
+    row["TRX Date"] = formattedDate;
+    const momentDate = moment(formattedDate, "DD-MM-YYYY");
+    return momentDate.isAfter(startDate) && momentDate.isBefore(endDate2);
+  });
+
+  const newSheet = XLSX.utils.json_to_sheet(newArr);
+  const targetWorkbook = XLSX.readFile(targetWorkbookPath);
+  const workingSheet = "Sales";
+
+  XLSX.utils.book_append_sheet(targetWorkbook, newSheet, workingSheet);
+  await XLSX.writeFile(targetWorkbook, targetWorkbookPath);
+  console.log("copy all data from GL to target workbook");
+  const downloadFile = await copySheets(
     sourceWorkbookPath,
     pnlWorkbookPath,
-    salesWorkbookPath,
+    targetWorkbookPath,
     date
-  ) =>{
-    const targetWorkbookPath = getTagetFileName(date);
-  
-    const targetWorkbook2 = new ExcelJS.Workbook();
-    await targetWorkbook2.xlsx.writeFile(targetWorkbookPath);
-    const workbookGL = XLSX.readFile(salesWorkbookPath);
-    const sourceSheetName = workbookGL.SheetNames[0];
-    const sheet = workbookGL.Sheets[sourceSheetName];
-  
-    const formattedStartDate = moment(date);
-    const endDate = formattedStartDate.add(27, "days");
-  
-    console.log("filter data on sales sheet");
-    const startDate = moment(date);
-    const endDate2 = endDate;
-  
-    const dataArray = XLSX.utils.sheet_to_json(sheet);
-    const newArr = dataArray.filter((row) => {
-      const serialDate = row["TRX Date"];
-      const excelStartDate = new Date(1900, 0, 1);
-      const date = new Date(
-        excelStartDate.getTime() + (serialDate - 2) * 24 * 60 * 60 * 1000
-      );
-      const formattedDate = moment(date).format("DD-MM-YYYY");
-      row["TRX Date"] = formattedDate;
-      const momentDate = moment(formattedDate, "DD-MM-YYYY");
-      return momentDate.isAfter(startDate) && momentDate.isBefore(endDate2);
-    });
-  
-    const newSheet = XLSX.utils.json_to_sheet(newArr);
-    const targetWorkbook = XLSX.readFile(targetWorkbookPath);
-    const workingSheet = "Sales";
-  
-    XLSX.utils.book_append_sheet(targetWorkbook, newSheet, workingSheet);
-    await XLSX.writeFile(targetWorkbook, targetWorkbookPath);
-    console.log("copy all data from GL to target workbook");
-    const downloadFile = await copySheets(sourceWorkbookPath, pnlWorkbookPath, targetWorkbookPath, date);
-    return downloadFile;
-  }
+  );
+  return downloadFile;
+};
