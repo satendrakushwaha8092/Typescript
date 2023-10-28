@@ -6,6 +6,7 @@ let storeRecentStandardFoodCostAddress = [];
 let storeFormulaJeUploadGcolumn = [];
 
 const idealPercent = 21.79;
+const JEUPLOADCLEAN = "2023 JE UPLOAD CLEAN";
 
 const copySheets = async (
   sourceWorkbookPath,
@@ -40,7 +41,7 @@ const copySheets = async (
 
       const existingSheet = targetWorkbook.getWorksheet(sourceSheet.name);
 
-      if (!existingSheet && sourceSheet.name != "2023 JE UPLOAD CLEAN") {
+      if (!existingSheet && sourceSheet.name != JEUPLOADCLEAN) {
         // If the sheet doesn't exist in the target workbook, clone and add it
         const newTargetSheet = targetWorkbook.addWorksheet(sourceSheet.name, {
           properties: sourceSheet.properties,
@@ -430,7 +431,7 @@ const copyDataJeUploadToJeUploadClean = async (
 ) => {
   const jeUploadSheet = targetWorkbook.getWorksheet("JE Upload ");
 
-  const addJeUploadClean = targetWorkbook.addWorksheet("2023 JE UPLOAD CLEAN");
+  const addJeUploadClean = targetWorkbook.addWorksheet(JEUPLOADCLEAN);
 
   const headerRow = addJeUploadClean.getRow(2);
 
@@ -446,6 +447,18 @@ const copyDataJeUploadToJeUploadClean = async (
   headerRow.getCell(9).value = "LineDescription";
   headerRow.getCell(10).value = "Debit";
   headerRow.getCell(11).value = "Credit";
+
+  headerRow.eachCell((cell) => {
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: '0000FF' }, // Blue color
+    };
+    cell.font = {
+      bold: true,
+      color: { argb: 'FFFFFF' }, // White color
+    };
+  });
 
   let i = 2;
 
