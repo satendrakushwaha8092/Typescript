@@ -104,6 +104,8 @@ const copypnlSheet = (
     },
   ];
 
+  const pnlSheet = newpnLData.getWorksheet(1);
+
   sourceSheet.eachRow((sourceRow, rowNum) => {
     const newTargetRow = newTargetSheet.getRow(rowNum);
     sourceRow.eachCell((cell, colNum) => {
@@ -114,20 +116,34 @@ const copypnlSheet = (
       ) {
         newTargetCell.value = cell.value;
         newTargetCell.formula = cell.formula;
-        newTargetCell.result = cell.result;
         newTargetCell.style = cell.style;
-      } else if (colNum > 4 && sourceSheet.name == "P&L Data") {
-        const pnlSheet = newpnLData.getWorksheet(1);
-        const sourceCell = pnlSheet.getCell(rowNum, colNum - 4);
+      } 
+      // else if (colNum > 4 && sourceSheet.name == "P&L Data") {
+      //   const sourceCell = pnlSheet.getCell(rowNum, colNum - 4);
+      //   const sourceCell2 = sourceSheetpnl[sourceCell.address];
+      //   const result = sourceCell2 ? sourceCell2.v : "";
+      //   newTargetCell.value = result;
+      //   newTargetCell.formula = sourceCell.formula;
+      //   newTargetCell.style = sourceCell.style;
+      // }
+    });
+  });
+
+  pnlSheet.eachRow((sourceRow, rowNum) => {
+     const newTargetRow = newTargetSheet.getRow(rowNum);
+    sourceRow.eachCell((cell, colNum) => {
+      const newTargetCell = newTargetRow.getCell(colNum+4);
+
+      const sourceCell = pnlSheet.getCell(rowNum, colNum);
         const sourceCell2 = sourceSheetpnl[sourceCell.address];
         const result = sourceCell2 ? sourceCell2.v : "";
         newTargetCell.value = result;
         newTargetCell.formula = sourceCell.formula;
-        newTargetCell.result = sourceCell.result;
         newTargetCell.style = sourceCell.style;
-      }
     });
   });
+
+  
 
   const columnCount = newTargetSheet.columnCount;
   newTargetSheet.autoFilter = `A6:${
@@ -294,7 +310,23 @@ const copyLaborStandardVariance = (
               : cell.value;
           targetCell.style = cell.style;
         }
-      } else {
+      } else if(colNum == 5 && rowNum >7){
+        const targetCell = targetRow.getCell(colNum);
+
+        const formula = cell.formula;
+        const targetCell2 = targetRow.getCell(tempColmunNum - 3);
+          const targetCell3 = targetRow.getCell(tempColmunNum - 2);
+          console.log(targetCell2.address,targetCell3.address)
+
+        const newFormula = formula.replace(targetCell2.address,targetCell3.address)
+        targetCell.value = {
+          formula: newFormula
+        }
+        targetCell.formula = newFormula
+        targetCell.style = cell.style;
+        targetCell.result = cell.result;
+      } 
+      else {
         const targetCell = targetRow.getCell(colNum);
         targetCell.value = cell.value;
         targetCell.formula = cell.formula;
@@ -450,13 +482,13 @@ const copyDataJeUploadToJeUploadClean = async (
 
   headerRow.eachCell((cell) => {
     cell.fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: '0000FF' }, // Blue color
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "0000FF" }, // Blue color
     };
     cell.font = {
       bold: true,
-      color: { argb: 'FFFFFF' }, // White color
+      color: { argb: "FFFFFF" }, // White color
     };
   });
 
@@ -566,8 +598,8 @@ module.exports.copySales = async (
   const endDate = formattedStartDate.add(27, "days");
 
   console.log("filter data on sales sheet");
-  const startDate = moment(date);
-  const endDate2 = endDate;
+  const startDate = moment((moment(date).format("DD-MM-YYYY")), "DD-MM-YYYY");
+  const endDate2 = moment((endDate.format("DD-MM-YYYY")), "DD-MM-YYYY");
 
   const dataArray = XLSX.utils.sheet_to_json(sheet);
   const newArr = dataArray.filter((row) => {
